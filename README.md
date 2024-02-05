@@ -47,3 +47,9 @@ You can customize the prompt templates that are used with the generate command. 
 To customize the prompt template that is used when context is provided, you should update the setting `Bedrock Playground › Generate: Contextual Prompt Template`. The template should contain both a `{REQUEST}` placeholder as well as a `{CONTEXT}` placeholder. For example:
 
 `"\n\nHuman: Use the context wrapped in <context></context> tags to respond to a user's request.\nThe user's request will be wrapped in <request></request> tags.\n<context>{CONTEXT}</context>\n<request>{REQUEST}</request>\nPlease place your response in <response></response> tags.\n\nAssistant:"`
+
+## Creators
+
+[<img src="https://github.com/bobbywlindsey.png" width="60px;"/><br /><sub><a href="https://github.com/bobbywlindsey">bobbywlindsey</a></sub>](https://github.com/bobbywlindsey/)
+
+[<img src="https://github.com/tonykchen.png" width="60px;"/><br /><sub><a href="https://github.com/tonykchen">tonykchen</a></sub>](https://github.com/tonykchen/)
