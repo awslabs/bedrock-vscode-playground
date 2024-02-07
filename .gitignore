@@ -5,3 +5,4 @@ out/
 yarn.lock
 .vscode-test/
 *.vsix
+.vscode/

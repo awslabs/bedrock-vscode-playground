@@ -64,6 +64,7 @@ export const modelPromptStructureMapping: { [key: string]: string } = {
   "amazon.titan-text-lite-v1": notClaudeCommandPromptStructure,
   "meta.llama2-13b-chat-v1": notClaudeCommandPromptStructure,
   "meta.llama2-70b-chat-v1": notClaudeCommandPromptStructure,
+  "noSelection": notClaudeCommandPromptStructure,
 };
 
 // Get access to the VS Code API from within the webview context
@@ -82,14 +83,14 @@ function main() {
   runButton?.addEventListener("click", handleRunClick);
   clearButton?.addEventListener("click", handleClearClick);
   copyButton?.addEventListener("click", handleCopyClick);
-  const dropDownElement = document.getElementById("llm") as HTMLDivElement;
-  const selectedLLM = dropDownElement.getAttribute("current-value");
+  const selectedLLM = "anthropic.claude-v2:1"; 
   getModelCard(selectedLLM);
   getPromptStructure(selectedLLM);
 }
 
 export function getModelCard(model: string | null) {
   const modelCardElement = document.getElementById("model-card") as HTMLDivElement;
+
   while (modelCardElement.firstChild) {
     modelCardElement.removeChild(modelCardElement.firstChild);
   }
