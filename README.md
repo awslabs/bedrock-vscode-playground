@@ -12,6 +12,8 @@ This extension uses your local AWS credentials to invoke the Amazon Bedrock serv
 
 ![alt text](media/profileName.png)
 
+> ⚠️ By using this tool, you understand that it uses Amazon Bedrock's [InvokeModel](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html) API, which will incur AWS charges. The charges you incur from using Amazon Bedrock will be your responsibility. Please review the latest Amazon Bedrock pricing [here](https://aws.amazon.com/bedrock/pricing/) before using this tool.
+
 ## Extension Features
 
 The extension currently has 2 features:
