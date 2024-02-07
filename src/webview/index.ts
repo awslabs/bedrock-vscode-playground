@@ -83,9 +83,7 @@ function main() {
   runButton?.addEventListener("click", handleRunClick);
   clearButton?.addEventListener("click", handleClearClick);
   copyButton?.addEventListener("click", handleCopyClick);
-  const dropDownElement = document.getElementById("llm") as HTMLDivElement;
   const selectedLLM = "anthropic.claude-v2:1"; 
-  // const selectedLLM = dropDownElement.getAttribute("current-value");
   getModelCard(selectedLLM);
   getPromptStructure(selectedLLM);
 }
