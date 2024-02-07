@@ -1,6 +1,6 @@
 {
   "name": "bedrock-vscode-playground",
-  "displayName": "bedrock-vscode-playground",
+  "displayName": "Bedrock Visual Studio Code Playground",
   "description": "Explore and experiment with large language models (LLMs) available in Amazon Bedrock",
   "version": "0.1.0",
   "publisher": "AmazonWebServices-AISolutionsArchitecture",
