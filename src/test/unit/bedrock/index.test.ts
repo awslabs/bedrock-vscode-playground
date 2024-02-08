@@ -11,7 +11,7 @@ suite("bedrock.index", () => {
   test("Create generator", () => {
     const tests = [
       { modelId: "anthropic.claude-v2", expected: AnthropicClaude },
-      { modelId: "anthropic.claude-v1", expected: AnthropicClaude },
+      { modelId: "anthropic.claude-v2:1", expected: AnthropicClaude },
       { modelId: "anthropic.claude-instant-v1", expected: AnthropicClaude },
       { modelId: "cohere.command-text-v14", expected: CohereCommand },
       { modelId: "cohere.command-light-text-v14", expected: CohereCommand },
