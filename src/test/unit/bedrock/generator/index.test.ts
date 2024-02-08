@@ -8,9 +8,6 @@ import {
   Generator,
 } from "../../../../bedrock/generator";
 import * as chai from "chai";
-import { mockClient } from "aws-sdk-client-mock";
-import { BedrockRuntimeClient, InvokeModelCommand } from "@aws-sdk/client-bedrock-runtime";
-import { Uint8ArrayBlobAdapter } from "@smithy/util-stream";
 import * as sinon from "sinon";
 import * as sinonChai from "sinon-chai";
 import * as getWorkspaceConfigModule from "../../../../utilities/getWorkspaceConfig";
@@ -39,16 +36,13 @@ suite("bedrock.generator.index", () => {
   });
 
   test("Generate", async () => {
-    const bedrockRuntimeClientmock = mockClient(BedrockRuntimeClient);
-
-    bedrockRuntimeClientmock
-      .on(InvokeModelCommand)
-      .resolves({ body: Uint8ArrayBlobAdapter.fromString('{"completion": "test response"}') });
+    const mockGenerate = sinon.stub(generator, "generate");
+    mockGenerate.resolves("test response");
 
     const response = await generator.generate("test prompt");
     expect(response).to.equal("test response");
 
-    bedrockRuntimeClientmock.reset();
+    mockGenerate.reset();
   });
 
   test("AnthropicClaude: create request body", () => {

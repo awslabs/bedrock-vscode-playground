@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { BedrockRuntimeClient, InvokeModelCommand } from "@aws-sdk/client-bedrock-runtime";
-import { fromIni } from "@aws-sdk/credential-providers";
 import { getWorkspaceConfig } from "../../utilities/getWorkspaceConfig";
+import { fromNodeProviderChain } from "@aws-sdk/credential-providers";
 
 /**
  * Abstract class representing a generic text generator.
@@ -52,12 +52,12 @@ export abstract class Generator {
    */
   async generate(prompt: string): Promise<string> {
     // Create a new BedrockRuntimeClient instance
-    // const client = new BedrockRuntimeClient(
-    //   fromIni({
-    //     profile: "default",
-    //   })
-    // );
-    const client = new BedrockRuntimeClient({});
+    const client = new BedrockRuntimeClient({
+      credentials: fromNodeProviderChain({
+        profile: getWorkspaceConfig("profileName"),
+      }),
+    });
+
     // Stringify the request body
     var body = JSON.stringify(this.createRequestBody(prompt));
 
@@ -87,7 +87,6 @@ export abstract class Generator {
 
 export class AnthropicClaude extends Generator {
   createRequestBody(prompt: string) {
-
     return {
       prompt: prompt,
       max_tokens_to_sample: getWorkspaceConfig("anthropicClaude.maxTokensToSample"),
