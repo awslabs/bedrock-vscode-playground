@@ -330,7 +330,7 @@
   "dependencies": {
     "@aws-sdk/client-bedrock": "^3.509.0",
     "@aws-sdk/client-bedrock-runtime": "^3.509.0",
-    "@aws-sdk/credential-provider-node": "^3.509.0",
+    "@aws-sdk/credential-providers": "^3.509.0",
     "@aws-sdk/types": "^3.509.0",
     "@smithy/util-stream": "^2.0.20",
     "@vscode/webview-ui-toolkit": "^1.2.2"
