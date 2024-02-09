@@ -13,5 +13,8 @@ jobs:
             node-version: '20'
             registry-url: 'https://registry.npmjs.org'
 
+        - name: Install dependencies
+          run: npm install
+
         - name: Run unit tests
           run:  npm run unit-tests
