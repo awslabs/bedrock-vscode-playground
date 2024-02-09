@@ -17,4 +17,4 @@ jobs:
           run: npm install
 
         - name: Run unit tests
-          run:  npm run unit-tests
+          run:  xvfb-run -a npm run unit-tests
