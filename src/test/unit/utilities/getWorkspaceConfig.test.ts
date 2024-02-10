@@ -10,8 +10,8 @@ chai.use(sinonChai);
 suite("utilities.getWorkspaceConfig", () => {
   test("Get workspace configuration", () => {
     
-    var getConfigurationValueStub = sinon.stub();
-    var getConfigurationStub = sinon
+    const getConfigurationValueStub = sinon.stub();
+    const getConfigurationStub = sinon
       .stub(vscode.workspace, "getConfiguration")
       .returns({ get: getConfigurationValueStub } as any);
 

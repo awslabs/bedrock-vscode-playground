@@ -33,12 +33,9 @@ import {
   llama_2_ModelCard,
 } from "./modelCards";
 
-import {
-  claude_2_promptStructure,
-  notClaudeCommandPromptStructure,
-} from "./modelPromptStructures";
+import { claude_2_promptStructure, notClaudeCommandPromptStructure } from "./modelPromptStructures";
 
-export const modelCardMapping: { [key: string]: string } = {
+export const modelCardMapping: Record<string, string> = {
   "anthropic.claude-v2": claude_2_ModelCard,
   "anthropic.claude-v2:1": claude_2_1_ModelCard,
   "anthropic.claude-instant-v1": claudeInstantModelCard,
@@ -52,7 +49,7 @@ export const modelCardMapping: { [key: string]: string } = {
   "meta.llama2-70b-chat-v1": llama_2_ModelCard,
 };
 
-export const modelPromptStructureMapping: { [key: string]: string } = {
+export const modelPromptStructureMapping: Record<string, string> = {
   "anthropic.claude-v2": claude_2_promptStructure,
   "anthropic.claude-v2:1": claude_2_promptStructure,
   "anthropic.claude-instant-v1": claude_2_promptStructure,
@@ -83,7 +80,7 @@ function main() {
   runButton?.addEventListener("click", handleRunClick);
   clearButton?.addEventListener("click", handleClearClick);
   copyButton?.addEventListener("click", handleCopyClick);
-  const selectedLLM = "anthropic.claude-v2:1"; 
+  const selectedLLM = "anthropic.claude-v2:1";
   getModelCard(selectedLLM);
   getPromptStructure(selectedLLM);
 }

@@ -49,7 +49,7 @@ export function playgroundCommandCallback(context: vscode.ExtensionContext) {
         (progress) => {
           progress.report({ increment: 0 });
           progress.report({ increment: 100 });
-          let generator = createGenerator(message.selectedLLM);
+          const generator = createGenerator(message.selectedLLM);
           const p = new Promise<void>((resolve) => {
             generator!
               .generate(message.prompt)

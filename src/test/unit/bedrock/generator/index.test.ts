@@ -28,7 +28,7 @@ class TestGenerator extends Generator {
   }
 }
 
-let generator = new TestGenerator("test-model-id");
+const generator = new TestGenerator("test-model-id");
 
 suite("bedrock.generator.index", () => {
   test("Generator properties", () => {
@@ -46,9 +46,9 @@ suite("bedrock.generator.index", () => {
   });
 
   test("AnthropicClaude: create request body", () => {
-    let generator = new AnthropicClaude("claude-model-id");
+    const generator = new AnthropicClaude("claude-model-id");
 
-    var getWorkspaceConfigStub = sinon.stub(getWorkspaceConfigModule, "getWorkspaceConfig");
+    const getWorkspaceConfigStub = sinon.stub(getWorkspaceConfigModule, "getWorkspaceConfig");
 
     getWorkspaceConfigStub.withArgs("anthropicClaude.maxTokensToSample").returns(300);
     getWorkspaceConfigStub.withArgs("anthropicClaude.temperature").returns(0.5);
@@ -56,7 +56,7 @@ suite("bedrock.generator.index", () => {
     getWorkspaceConfigStub.withArgs("anthropicClaude.topP").returns(1);
     getWorkspaceConfigStub.withArgs("anthropicClaude.stopSequences").returns(["\n\nHuman:"]);
 
-    let requestBody = generator.createRequestBody("test prompt");
+    const requestBody = generator.createRequestBody("test prompt");
     expect(requestBody).to.deep.equal({
       prompt: "test prompt",
       max_tokens_to_sample: 300,
@@ -70,22 +70,22 @@ suite("bedrock.generator.index", () => {
   });
 
   test("AnthropicClaude: extract response", () => {
-    let generator = new AnthropicClaude("claude-model-id");
-    let response = generator.extractResponse({ completion: "test response" });
+    const generator = new AnthropicClaude("claude-model-id");
+    const response = generator.extractResponse({ completion: "test response" });
     expect(response).to.equal("test response");
   });
 
   test("AmazonTitan: create request body", () => {
-    let generator = new AmazonTitan("titan-model-id");
+    const generator = new AmazonTitan("titan-model-id");
 
-    var getWorkspaceConfigStub = sinon.stub(getWorkspaceConfigModule, "getWorkspaceConfig");
+    const getWorkspaceConfigStub = sinon.stub(getWorkspaceConfigModule, "getWorkspaceConfig");
 
     getWorkspaceConfigStub.withArgs("amazonTitan.maxTokenCount").returns(4096);
     getWorkspaceConfigStub.withArgs("amazonTitan.temperature").returns(0);
     getWorkspaceConfigStub.withArgs("amazonTitan.topP").returns(1);
     getWorkspaceConfigStub.withArgs("amazonTitan.stopSequences").returns([]);
 
-    let requestBody = generator.createRequestBody("test prompt");
+    const requestBody = generator.createRequestBody("test prompt");
 
     expect(requestBody).to.deep.equal({
       inputText: "test prompt",
@@ -101,15 +101,15 @@ suite("bedrock.generator.index", () => {
   });
 
   test("AmazonTitan: extract response", () => {
-    let generator = new AmazonTitan("titan-model-id");
-    let response = generator.extractResponse({ results: [{ outputText: "test response" }] });
+    const generator = new AmazonTitan("titan-model-id");
+    const response = generator.extractResponse({ results: [{ outputText: "test response" }] });
     expect(response).to.equal("test response");
   });
 
   test("AI21Jurassic2: create request body", () => {
-    let generator = new AI21Jurassic2("j2-model-id");
+    const generator = new AI21Jurassic2("j2-model-id");
 
-    var getWorkspaceConfigStub = sinon.stub(getWorkspaceConfigModule, "getWorkspaceConfig");
+    const getWorkspaceConfigStub = sinon.stub(getWorkspaceConfigModule, "getWorkspaceConfig");
 
     getWorkspaceConfigStub.withArgs("AI21 Jurassic-2.maxTokens").returns(200);
     getWorkspaceConfigStub.withArgs("AI21 Jurassic-2.temperature").returns(0.5);
@@ -156,7 +156,7 @@ suite("bedrock.generator.index", () => {
       .withArgs("AI21 Jurassic-2.frequencyPenalty.applyToEmojis")
       .returns(false);
 
-    let requestBody = generator.createRequestBody("test prompt");
+    const requestBody = generator.createRequestBody("test prompt");
 
     expect(requestBody).to.deep.equal({
       prompt: "test prompt",
@@ -194,17 +194,17 @@ suite("bedrock.generator.index", () => {
   });
 
   test("AI21Jurassic2: extract response", () => {
-    let generator = new AI21Jurassic2("j2-model-id");
-    let response = generator.extractResponse({
+    const generator = new AI21Jurassic2("j2-model-id");
+    const response = generator.extractResponse({
       completions: [{ data: { text: "test response" } }],
     });
     expect(response).to.equal("test response");
   });
 
   test("CohereCommand: create request body", () => {
-    let generator = new CohereCommand("command-model-id");
+    const generator = new CohereCommand("command-model-id");
 
-    var getWorkspaceConfigStub = sinon.stub(getWorkspaceConfigModule, "getWorkspaceConfig");
+    const getWorkspaceConfigStub = sinon.stub(getWorkspaceConfigModule, "getWorkspaceConfig");
 
     getWorkspaceConfigStub.withArgs("cohereCommand.temperature").returns(0.9);
     getWorkspaceConfigStub.withArgs("cohereCommand.topP").returns(0.75);
@@ -214,7 +214,7 @@ suite("bedrock.generator.index", () => {
     getWorkspaceConfigStub.withArgs("cohereCommand.returnLikelihoods").returns("GENERATION");
     getWorkspaceConfigStub.withArgs("cohereCommand.truncate").returns("NONE");
 
-    let requestBody = generator.createRequestBody("test prompt");
+    const requestBody = generator.createRequestBody("test prompt");
 
     expect(requestBody).to.deep.equal({
       prompt: "test prompt",
@@ -231,8 +231,8 @@ suite("bedrock.generator.index", () => {
   });
 
   test("CohereCommand: extract response", () => {
-    let generator = new CohereCommand("j2-model-id");
-    let response = generator.extractResponse({
+    const generator = new CohereCommand("j2-model-id");
+    const response = generator.extractResponse({
       generations: [{ text: "test response" }],
     });
 
@@ -240,15 +240,15 @@ suite("bedrock.generator.index", () => {
   });
 
   test("LLama2: create request body", () => {
-    let generator = new Llama2("llama2-model-id");
+    const generator = new Llama2("llama2-model-id");
 
-    var getWorkspaceConfigStub = sinon.stub(getWorkspaceConfigModule, "getWorkspaceConfig");
+    const getWorkspaceConfigStub = sinon.stub(getWorkspaceConfigModule, "getWorkspaceConfig");
 
     getWorkspaceConfigStub.withArgs("bedrockPlayground.llama2.temperature").returns(0.5);
     getWorkspaceConfigStub.withArgs("bedrockPlayground.llama2.topP").returns(0.9);
     getWorkspaceConfigStub.withArgs("bedrockPlayground.llama2.maximumLength").returns(512);
 
-    let requestBody = generator.createRequestBody("test prompt");
+    const requestBody = generator.createRequestBody("test prompt");
 
     expect(requestBody).to.deep.equal({
       prompt: "test prompt",
@@ -261,8 +261,8 @@ suite("bedrock.generator.index", () => {
   });
 
   test("LLama2: extract response", () => {
-    let generator = new Llama2("llama2-model-id");
-    let response = generator.extractResponse({
+    const generator = new Llama2("llama2-model-id");
+    const response = generator.extractResponse({
       generation: "test response",
     });
 
