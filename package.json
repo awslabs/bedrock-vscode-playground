@@ -58,19 +58,13 @@
           ],
           "markdownDescription": "The default model for to use for `Bedrock Playground: Generate` command."
         },
-        "bedrockPlayground.generate.promptTemplate": {
-          "type": "array",
-          "default": [
-            "\n\nHuman: {REQUEST}\nPlease placed your response in <response></response> XML tags.\n\nAssistant:"
-          ],
-          "markdownDescription": "The prompt template when invoking `Bedrock Playground: Generate` **without** context (e.g. highlighted code). Make sure the template contains a `{REQUEST}` placeholder. This placeholder will be substituted with the user's request."
-        },
-        "bedrockPlayground.generate.contextualPromptTemplate": {
-          "type": "array",
-          "default": [
-            "\n\nHuman: Use the context wrapped in <context></context> tags to respond to a user's request.\nThe user's request will be wrapped in <request></request> tags.\n<context>{CONTEXT}</context>\n<request>{REQUEST}</request>\nPlease place your response in <response></response> tags.\n\nAssistant:"
-          ],
-          "markdownDescription": "The prompt template when invoking `Bedrock Playground: Generate` **with** context (e.g. highlighted code). Make sure the template contains a `{REQUEST}` and `{CONTEXT}` placeholder. The `{REQUEST}` placeholder will be substituted with the user's request while the `{CONTEXT}` placeholder will be substituted with context from a file."
+        "bedrockPlayground.generate.promptTemplates": {
+          "type": "object",
+          "default": {
+            "generate": "\n\nHuman: {REQUEST}\nPlease placed your response in <response></response> XML tags.\n\nAssistant:",
+            "generateWithContext": "\n\nHuman: Use the context wrapped in <context></context> tags to respond to a user's request.\nThe user's request will be wrapped in <request></request> tags.\n<context>{CONTEXT}</context>\n<request>{REQUEST}</request>\nPlease place your response in <response></response> tags.\n\nAssistant:"
+          },
+          "markdownDescription": "The prompt templates used when invoking `Bedrock Playground: Generate`. Each template must contain a `{REQUEST}` placeholder which will be substituted with the user's request. The `generateWithContext` template should also contain a `{CONTEXT}` placeholder, which will be substituted with context from a file."
         },
         "bedrockPlayground.anthropicClaude.maxTokensToSample": {
           "type": "number",

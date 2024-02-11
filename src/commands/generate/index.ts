@@ -26,7 +26,7 @@ export function generateCommandCallback() {
       if (!userRequest) {
         throw new Error("Input was not defined or cancelled.");
       } else {
-        const modelId = getWorkspaceConfig("generate.modelId") || "";
+        const modelId = getWorkspaceConfig<string>("generate.modelId") || "";
         vscode.window.withProgress(
           {
             location: vscode.ProgressLocation.Window,
@@ -66,14 +66,9 @@ export function generateCommandCallback() {
 }
 
 export function createPrompt(request: string, context: string): string {
-  let prompt: string;
+  const templates = getWorkspaceConfig<Record<string, string>>("generate.promptTemplates");
+  const templateKey = context ? "generateWithContext" : "generate";
+  const template = templates?.[templateKey] || "";
 
-  if (context) {
-    const promptTemplate = getWorkspaceConfig("generate.contextualPromptTemplate")[0];
-    prompt = promptTemplate.replace("{REQUEST}", request).replace("{CONTEXT}", context);
-  } else {
-    const promptTemplate = getWorkspaceConfig("generate.promptTemplate")[0];
-    prompt = promptTemplate.replace("{REQUEST}", request);
-  }
-  return prompt;
+  return template.replace("{REQUEST}", request).replace("{CONTEXT}", context);
 }

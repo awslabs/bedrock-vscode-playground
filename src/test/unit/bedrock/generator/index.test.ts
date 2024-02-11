@@ -15,40 +15,49 @@ import * as getWorkspaceConfigModule from "../../../../utilities/getWorkspaceCon
 const expect = chai.expect;
 chai.use(sinonChai);
 
-class TestGenerator extends Generator {
-  createRequestBody(prompt: string) {
-    return {
-      prompt: prompt,
-      maxTokens: 300,
-    };
-  }
-
-  extractResponse(responseBody: any): string {
-    return responseBody.completion;
-  }
-}
-
-const generator = new TestGenerator("test-model-id");
-
 suite("bedrock.generator.index", () => {
+  let generator: Generator;
+  let getWorkspaceConfigStub: sinon.SinonStub;
+
+  setup(() => {
+    class TestGenerator extends Generator {
+      createRequestBody(prompt: string) {
+        return {
+          prompt: prompt,
+          maxTokens: 300,
+        };
+      }
+
+      extractResponse(responseBody: any): string {
+        return responseBody.completion;
+      }
+    }
+
+    generator = new TestGenerator("test-model-id");
+
+    getWorkspaceConfigStub = sinon.stub(getWorkspaceConfigModule, "getWorkspaceConfig");
+  });
+
+  teardown(() => {
+    getWorkspaceConfigStub.restore();
+  });
+
   test("Generator properties", () => {
     expect(generator.modelId).to.equal("test-model-id");
   });
 
   test("Generate", async () => {
-    const mockGenerate = sinon.stub(generator, "generate");
-    mockGenerate.resolves("test response");
+    const generateStub = sinon.stub(generator, "generate");
+    generateStub.resolves("test response");
 
     const response = await generator.generate("test prompt");
     expect(response).to.equal("test response");
 
-    mockGenerate.reset();
+    generateStub.restore();
   });
 
   test("AnthropicClaude: create request body", () => {
     const generator = new AnthropicClaude("claude-model-id");
-
-    const getWorkspaceConfigStub = sinon.stub(getWorkspaceConfigModule, "getWorkspaceConfig");
 
     getWorkspaceConfigStub.withArgs("anthropicClaude.maxTokensToSample").returns(300);
     getWorkspaceConfigStub.withArgs("anthropicClaude.temperature").returns(0.5);
@@ -65,8 +74,6 @@ suite("bedrock.generator.index", () => {
       top_p: 1,
       stop_sequences: ["\n\nHuman:"],
     });
-
-    getWorkspaceConfigStub.restore();
   });
 
   test("AnthropicClaude: extract response", () => {
@@ -77,8 +84,6 @@ suite("bedrock.generator.index", () => {
 
   test("AmazonTitan: create request body", () => {
     const generator = new AmazonTitan("titan-model-id");
-
-    const getWorkspaceConfigStub = sinon.stub(getWorkspaceConfigModule, "getWorkspaceConfig");
 
     getWorkspaceConfigStub.withArgs("amazonTitan.maxTokenCount").returns(4096);
     getWorkspaceConfigStub.withArgs("amazonTitan.temperature").returns(0);
@@ -96,8 +101,6 @@ suite("bedrock.generator.index", () => {
         stopSequences: [],
       },
     });
-
-    getWorkspaceConfigStub.restore();
   });
 
   test("AmazonTitan: extract response", () => {
@@ -108,8 +111,6 @@ suite("bedrock.generator.index", () => {
 
   test("AI21Jurassic2: create request body", () => {
     const generator = new AI21Jurassic2("j2-model-id");
-
-    const getWorkspaceConfigStub = sinon.stub(getWorkspaceConfigModule, "getWorkspaceConfig");
 
     getWorkspaceConfigStub.withArgs("AI21 Jurassic-2.maxTokens").returns(200);
     getWorkspaceConfigStub.withArgs("AI21 Jurassic-2.temperature").returns(0.5);
@@ -189,8 +190,6 @@ suite("bedrock.generator.index", () => {
         applyToEmojis: false,
       },
     });
-
-    getWorkspaceConfigStub.restore();
   });
 
   test("AI21Jurassic2: extract response", () => {
@@ -203,8 +202,6 @@ suite("bedrock.generator.index", () => {
 
   test("CohereCommand: create request body", () => {
     const generator = new CohereCommand("command-model-id");
-
-    const getWorkspaceConfigStub = sinon.stub(getWorkspaceConfigModule, "getWorkspaceConfig");
 
     getWorkspaceConfigStub.withArgs("cohereCommand.temperature").returns(0.9);
     getWorkspaceConfigStub.withArgs("cohereCommand.topP").returns(0.75);
@@ -226,8 +223,6 @@ suite("bedrock.generator.index", () => {
       return_likelihoods: "GENERATION",
       truncate: "NONE",
     });
-
-    getWorkspaceConfigStub.restore();
   });
 
   test("CohereCommand: extract response", () => {
@@ -242,8 +237,6 @@ suite("bedrock.generator.index", () => {
   test("LLama2: create request body", () => {
     const generator = new Llama2("llama2-model-id");
 
-    const getWorkspaceConfigStub = sinon.stub(getWorkspaceConfigModule, "getWorkspaceConfig");
-
     getWorkspaceConfigStub.withArgs("bedrockPlayground.llama2.temperature").returns(0.5);
     getWorkspaceConfigStub.withArgs("bedrockPlayground.llama2.topP").returns(0.9);
     getWorkspaceConfigStub.withArgs("bedrockPlayground.llama2.maximumLength").returns(512);
@@ -256,8 +249,6 @@ suite("bedrock.generator.index", () => {
       top_p: 0.9,
       max_gen_len: 512,
     });
-
-    getWorkspaceConfigStub.restore();
   });
 
   test("LLama2: extract response", () => {

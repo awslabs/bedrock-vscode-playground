@@ -17,7 +17,7 @@ export abstract class Generator {
   async generate(prompt: string): Promise<string> {
     const client = new BedrockRuntimeClient({
       credentials: fromNodeProviderChain({
-        profile: getWorkspaceConfig("profileName"),
+        profile: getWorkspaceConfig<string>("profileName"),
       }),
     });
 
