@@ -2,7 +2,7 @@
 
 This is a Visual Studio Code (VS Code) extension which allows developers to easily explore and experiment with large language models (LLMs) available in Amazon Bedrock.
 
-This is an open source project and we would love for you to be involved. To contributed, please refer to [CONTRIBUTING.md](./CONTRIBUTING.md).
+This is an open source project and we would love for you to be involved. To contribute, please refer to [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## Getting Started
 
@@ -44,7 +44,7 @@ You can also provide context from an active text editor when using the `Bedrock 
 
 You can customize the prompt templates that are used with the generate command. To customize the template used when there is no context, you should update the setting `Bedrock Playground › Generate: Prompt Template`. The template string should contain a `{REQUEST}` placeholder which will be substituted with the user's request. For example:
 
-`"\n\nHuman: {REQUEST}\nPlease placed your response in <response></response> XML tags.\n\nAssistant:"`
+`"\n\nHuman: {REQUEST}\nPlease place your response in <response></response> XML tags.\n\nAssistant:"`
 
 To customize the prompt template that is used when context is provided, you should update the setting `Bedrock Playground › Generate: Contextual Prompt Template`. The template should contain both a `{REQUEST}` placeholder as well as a `{CONTEXT}` placeholder. For example:
 
