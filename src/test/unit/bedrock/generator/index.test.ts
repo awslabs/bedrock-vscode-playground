@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import {
   AnthropicClaude,
-  AmazonTitan,
+  AmazonTitanText,
   AI21Jurassic2,
   CohereCommand,
-  Llama2,
+  MetaLlama2,
   Generator,
 } from "../../../../bedrock/generator";
 import * as chai from "chai";
@@ -16,25 +16,9 @@ const expect = chai.expect;
 chai.use(sinonChai);
 
 suite("bedrock.generator.index", () => {
-  let generator: Generator;
   let getWorkspaceConfigStub: sinon.SinonStub;
 
   setup(() => {
-    class TestGenerator extends Generator {
-      createRequestBody(prompt: string) {
-        return {
-          prompt: prompt,
-          maxTokens: 300,
-        };
-      }
-
-      extractResponse(responseBody: any): string {
-        return responseBody.completion;
-      }
-    }
-
-    generator = new TestGenerator("test-model-id");
-
     getWorkspaceConfigStub = sinon.stub(getWorkspaceConfigModule, "getWorkspaceConfig");
   });
 
@@ -42,221 +26,272 @@ suite("bedrock.generator.index", () => {
     getWorkspaceConfigStub.restore();
   });
 
-  test("Generator properties", () => {
-    expect(generator.modelId).to.equal("test-model-id");
-  });
+  suite("Generator", () => {
+    let generator: Generator;
+    let generateStub: sinon.SinonStub;
 
-  test("Generate", async () => {
-    const generateStub = sinon.stub(generator, "generate");
-    generateStub.resolves("test response");
+    setup(() => {
+      class TestGenerator extends Generator {
+        createRequestBody(prompt: string) {
+          return {
+            prompt: prompt,
+            maxTokens: 300,
+          };
+        }
 
-    const response = await generator.generate("test prompt");
-    expect(response).to.equal("test response");
+        extractResponse(responseBody: any): string {
+          return responseBody.completion;
+        }
+      }
 
-    generateStub.restore();
-  });
+      generator = new TestGenerator("test-model-id");
 
-  test("AnthropicClaude: create request body", () => {
-    const generator = new AnthropicClaude("claude-model-id");
+      generateStub = sinon.stub(generator, "generate");
+      generateStub.resolves("test response");
+    });
 
-    getWorkspaceConfigStub.withArgs("anthropicClaude.maxTokensToSample").returns(300);
-    getWorkspaceConfigStub.withArgs("anthropicClaude.temperature").returns(0.5);
-    getWorkspaceConfigStub.withArgs("anthropicClaude.topK").returns(250);
-    getWorkspaceConfigStub.withArgs("anthropicClaude.topP").returns(1);
-    getWorkspaceConfigStub.withArgs("anthropicClaude.stopSequences").returns(["\n\nHuman:"]);
+    teardown(() => {
+      generateStub.restore();
+    });
 
-    const requestBody = generator.createRequestBody("test prompt");
-    expect(requestBody).to.deep.equal({
-      prompt: "test prompt",
-      max_tokens_to_sample: 300,
-      temperature: 0.5,
-      top_k: 250,
-      top_p: 1,
-      stop_sequences: ["\n\nHuman:"],
+    test("Generator properties", () => {
+      expect(generator.modelId).to.equal("test-model-id");
+    });
+
+    test("Generate", async () => {
+      const response = await generator.generate("test prompt");
+      expect(response).to.equal("test response");
     });
   });
 
-  test("AnthropicClaude: extract response", () => {
-    const generator = new AnthropicClaude("claude-model-id");
-    const response = generator.extractResponse({ completion: "test response" });
-    expect(response).to.equal("test response");
+  suite("AnthropicClaude", () => {
+    let generator: AnthropicClaude;
+
+    setup(() => {
+      getWorkspaceConfigStub.returns({
+        max_tokens_to_sample: 200,
+        temperature: 0.5,
+        top_k: 250,
+        top_p: 1,
+        stop_sequences: ["\n\nHuman:"],
+      });
+
+      generator = new AnthropicClaude("claude-model-id");
+    });
+
+    test("Create request body", () => {
+      const requestBody = generator.createRequestBody("test prompt");
+      expect(getWorkspaceConfigStub).to.have.been.calledOnceWith(
+        "inferenceParameters.anthropicClaude"
+      );
+
+      expect(requestBody).to.deep.equal({
+        prompt: "test prompt",
+        max_tokens_to_sample: 200,
+        temperature: 0.5,
+        top_k: 250,
+        top_p: 1,
+        stop_sequences: ["\n\nHuman:"],
+      });
+    });
+    test("Extract response", () => {
+      const response = generator.extractResponse({ completion: "test response" });
+      expect(response).to.equal("test response");
+    });
   });
 
-  test("AmazonTitan: create request body", () => {
-    const generator = new AmazonTitan("titan-model-id");
+  suite("AmazonTitanText", () => {
+    let generator: AmazonTitanText;
 
-    getWorkspaceConfigStub.withArgs("amazonTitan.maxTokenCount").returns(4096);
-    getWorkspaceConfigStub.withArgs("amazonTitan.temperature").returns(0);
-    getWorkspaceConfigStub.withArgs("amazonTitan.topP").returns(1);
-    getWorkspaceConfigStub.withArgs("amazonTitan.stopSequences").returns([]);
-
-    const requestBody = generator.createRequestBody("test prompt");
-
-    expect(requestBody).to.deep.equal({
-      inputText: "test prompt",
-      textGenerationConfig: {
-        maxTokenCount: 4096,
+    setup(() => {
+      getWorkspaceConfigStub.returns({
         temperature: 0,
         topP: 1,
+        maxTokenCount: 512,
         stopSequences: [],
-      },
+      });
+
+      generator = new AmazonTitanText("titan-model-id");
+    });
+    test("Create request body", () => {
+      const requestBody = generator.createRequestBody("test prompt");
+
+      expect(getWorkspaceConfigStub).to.have.been.calledOnceWith(
+        "inferenceParameters.amazonTitanText"
+      );
+
+      expect(requestBody).to.deep.equal({
+        inputText: "test prompt",
+        textGenerationConfig: {
+          maxTokenCount: 512,
+          temperature: 0,
+          topP: 1,
+          stopSequences: [],
+        },
+      });
+    });
+
+    test("Extract response", () => {
+      const response = generator.extractResponse({ results: [{ outputText: "test response" }] });
+      expect(response).to.equal("test response");
     });
   });
 
-  test("AmazonTitan: extract response", () => {
-    const generator = new AmazonTitan("titan-model-id");
-    const response = generator.extractResponse({ results: [{ outputText: "test response" }] });
-    expect(response).to.equal("test response");
-  });
+  suite("AI21Jurassic2", () => {
+    let generator: AI21Jurassic2;
 
-  test("AI21Jurassic2: create request body", () => {
-    const generator = new AI21Jurassic2("j2-model-id");
+    setup(() => {
+      getWorkspaceConfigStub.returns({
+        temperature: 0.5,
+        topP: 0.5,
+        maxTokens: 200,
+        stopSequences: [],
+        countPenalty: {
+          scale: 0,
+          applyToWhitespaces: false,
+          applyToPunctuations: false,
+          applyToNumbers: false,
+          applyToStopwords: false,
+          applyToEmojis: false,
+        },
+        presencePenalty: {
+          scale: 0,
+          applyToWhitespaces: false,
+          applyToPunctuations: false,
+          applyToNumbers: false,
+          applyToStopwords: false,
+          applyToEmojis: false,
+        },
+        frequencyPenalty: {
+          scale: 0,
+          applyToWhitespaces: false,
+          applyToPunctuations: false,
+          applyToNumbers: false,
+          applyToStopwords: false,
+          applyToEmojis: false,
+        },
+      });
 
-    getWorkspaceConfigStub.withArgs("AI21 Jurassic-2.maxTokens").returns(200);
-    getWorkspaceConfigStub.withArgs("AI21 Jurassic-2.temperature").returns(0.5);
-    getWorkspaceConfigStub.withArgs("AI21 Jurassic-2.topP").returns(0.5);
-    getWorkspaceConfigStub.withArgs("AI21 Jurassic-2.stopSequences").returns([]);
-    getWorkspaceConfigStub.withArgs("AI21 Jurassic-2.countPenalty.scale").returns(0);
-    getWorkspaceConfigStub
-      .withArgs("AI21 Jurassic-2.countPenalty.applyToWhitespaces")
-      .returns(false);
-    getWorkspaceConfigStub
-      .withArgs("AI21 Jurassic-2.countPenalty.applyToPunctuations")
-      .returns(false);
-    getWorkspaceConfigStub.withArgs("AI21 Jurassic-2.countPenalty.applyToNumbers").returns(false);
-    getWorkspaceConfigStub.withArgs("AI21 Jurassic-2.countPenalty.applyToStopwords").returns(false);
-    getWorkspaceConfigStub.withArgs("AI21 Jurassic-2.countPenalty.applyToEmojis").returns(false);
-    getWorkspaceConfigStub.withArgs("AI21 Jurassic-2.presencePenalty.scale").returns(0);
-    getWorkspaceConfigStub
-      .withArgs("AI21 Jurassic-2.presencePenalty.applyToWhitespaces")
-      .returns(false);
-    getWorkspaceConfigStub
-      .withArgs("AI21 Jurassic-2.presencePenalty.applyToPunctuations")
-      .returns(false);
-    getWorkspaceConfigStub
-      .withArgs("AI21 Jurassic-2.presencePenalty.applyToNumbers")
-      .returns(false);
-    getWorkspaceConfigStub
-      .withArgs("AI21 Jurassic-2.presencePenalty.applyToStopwords")
-      .returns(false);
-    getWorkspaceConfigStub.withArgs("AI21 Jurassic-2.presencePenalty.applyToEmojis").returns(false);
-    getWorkspaceConfigStub.withArgs("AI21 Jurassic-2.frequencyPenalty.scale").returns(0);
-    getWorkspaceConfigStub
-      .withArgs("AI21 Jurassic-2.frequencyPenalty.applyToWhitespaces")
-      .returns(false);
-    getWorkspaceConfigStub
-      .withArgs("AI21 Jurassic-2.frequencyPenalty.applyToPunctuations")
-      .returns(false);
-    getWorkspaceConfigStub
-      .withArgs("AI21 Jurassic-2.frequencyPenalty.applyToNumbers")
-      .returns(false);
-    getWorkspaceConfigStub
-      .withArgs("AI21 Jurassic-2.frequencyPenalty.applyToStopwords")
-      .returns(false);
-    getWorkspaceConfigStub
-      .withArgs("AI21 Jurassic-2.frequencyPenalty.applyToEmojis")
-      .returns(false);
+      generator = new AI21Jurassic2("j2-model-id");
+    });
+    test("Create request body", () => {
+      const requestBody = generator.createRequestBody("test prompt");
 
-    const requestBody = generator.createRequestBody("test prompt");
+      expect(getWorkspaceConfigStub).to.have.been.calledOnceWith(
+        "inferenceParameters.AI21 Jurassic-2"
+      );
 
-    expect(requestBody).to.deep.equal({
-      prompt: "test prompt",
-      maxTokens: 200,
-      temperature: 0.5,
-      topP: 0.5,
-      stopSequences: [],
-      countPenalty: {
-        scale: 0,
-        applyToWhitespaces: false,
-        applyToPunctuations: false,
-        applyToNumbers: false,
-        applyToStopwords: false,
-        applyToEmojis: false,
-      },
-      presencePenalty: {
-        scale: 0,
-        applyToWhitespaces: false,
-        applyToPunctuations: false,
-        applyToNumbers: false,
-        applyToStopwords: false,
-        applyToEmojis: false,
-      },
-      frequencyPenalty: {
-        scale: 0,
-        applyToWhitespaces: false,
-        applyToPunctuations: false,
-        applyToNumbers: false,
-        applyToStopwords: false,
-        applyToEmojis: false,
-      },
+      expect(requestBody).to.deep.equal({
+        prompt: "test prompt",
+        maxTokens: 200,
+        temperature: 0.5,
+        topP: 0.5,
+        stopSequences: [],
+        countPenalty: {
+          scale: 0,
+          applyToWhitespaces: false,
+          applyToPunctuations: false,
+          applyToNumbers: false,
+          applyToStopwords: false,
+          applyToEmojis: false,
+        },
+        presencePenalty: {
+          scale: 0,
+          applyToWhitespaces: false,
+          applyToPunctuations: false,
+          applyToNumbers: false,
+          applyToStopwords: false,
+          applyToEmojis: false,
+        },
+        frequencyPenalty: {
+          scale: 0,
+          applyToWhitespaces: false,
+          applyToPunctuations: false,
+          applyToNumbers: false,
+          applyToStopwords: false,
+          applyToEmojis: false,
+        },
+      });
+    });
+    test("Extract response", () => {
+      const response = generator.extractResponse({
+        completions: [{ data: { text: "test response" } }],
+      });
+      expect(response).to.equal("test response");
     });
   });
 
-  test("AI21Jurassic2: extract response", () => {
-    const generator = new AI21Jurassic2("j2-model-id");
-    const response = generator.extractResponse({
-      completions: [{ data: { text: "test response" } }],
+  suite("CohereCommand", () => {
+    let generator: CohereCommand;
+
+    setup(() => {
+      getWorkspaceConfigStub.returns({
+        temperature: 0.9,
+        p: 0.75,
+        k: 0,
+        max_tokens: 20,
+        stop_sequences: [],
+        truncate: "END",
+      });
+
+      generator = new CohereCommand("command-model-id");
     });
-    expect(response).to.equal("test response");
-  });
+    test("Create request body", () => {
+      const requestBody = generator.createRequestBody("test prompt");
 
-  test("CohereCommand: create request body", () => {
-    const generator = new CohereCommand("command-model-id");
+      expect(getWorkspaceConfigStub).to.have.been.calledOnceWith(
+        "inferenceParameters.cohereCommand"
+      );
 
-    getWorkspaceConfigStub.withArgs("cohereCommand.temperature").returns(0.9);
-    getWorkspaceConfigStub.withArgs("cohereCommand.topP").returns(0.75);
-    getWorkspaceConfigStub.withArgs("cohereCommand.topK").returns(1);
-    getWorkspaceConfigStub.withArgs("cohereCommand.maxTokens").returns(20);
-    getWorkspaceConfigStub.withArgs("cohereCommand.stopSequences").returns([]);
-    getWorkspaceConfigStub.withArgs("cohereCommand.returnLikelihoods").returns("GENERATION");
-    getWorkspaceConfigStub.withArgs("cohereCommand.truncate").returns("NONE");
-
-    const requestBody = generator.createRequestBody("test prompt");
-
-    expect(requestBody).to.deep.equal({
-      prompt: "test prompt",
-      temperature: 0.9,
-      p: 0.75,
-      k: 1,
-      max_tokens: 20,
-      stop_sequences: [],
-      return_likelihoods: "GENERATION",
-      truncate: "NONE",
+      expect(requestBody).to.deep.equal({
+        prompt: "test prompt",
+        temperature: 0.9,
+        p: 0.75,
+        k: 0,
+        max_tokens: 20,
+        stop_sequences: [],
+        truncate: "END",
+      });
     });
-  });
+    test("Extract response", () => {
+      const response = generator.extractResponse({
+        generations: [{ text: "test response" }],
+      });
 
-  test("CohereCommand: extract response", () => {
-    const generator = new CohereCommand("j2-model-id");
-    const response = generator.extractResponse({
-      generations: [{ text: "test response" }],
-    });
-
-    expect(response).to.equal("test response");
-  });
-
-  test("LLama2: create request body", () => {
-    const generator = new Llama2("llama2-model-id");
-
-    getWorkspaceConfigStub.withArgs("bedrockPlayground.llama2.temperature").returns(0.5);
-    getWorkspaceConfigStub.withArgs("bedrockPlayground.llama2.topP").returns(0.9);
-    getWorkspaceConfigStub.withArgs("bedrockPlayground.llama2.maximumLength").returns(512);
-
-    const requestBody = generator.createRequestBody("test prompt");
-
-    expect(requestBody).to.deep.equal({
-      prompt: "test prompt",
-      temperature: 0.5,
-      top_p: 0.9,
-      max_gen_len: 512,
+      expect(response).to.equal("test response");
     });
   });
 
-  test("LLama2: extract response", () => {
-    const generator = new Llama2("llama2-model-id");
-    const response = generator.extractResponse({
-      generation: "test response",
-    });
+  suite("MetaLlama2", () => {
+    let generator: MetaLlama2;
 
-    expect(response).to.equal("test response");
+    setup(() => {
+      getWorkspaceConfigStub.returns({
+        temperature: 0.5,
+        top_p: 0.9,
+        max_gen_len: 512,
+      });
+
+      generator = new MetaLlama2("llama2-model-id");
+    });
+    test("Create request body", () => {
+      const requestBody = generator.createRequestBody("test prompt");
+
+      expect(getWorkspaceConfigStub).to.have.been.calledOnceWith("inferenceParameters.metaLlama2");
+
+      expect(requestBody).to.deep.equal({
+        prompt: "test prompt",
+        temperature: 0.5,
+        top_p: 0.9,
+        max_gen_len: 512,
+      });
+    });
+    test("Extract response", () => {
+      const response = generator.extractResponse({
+        generation: "test response",
+      });
+
+      expect(response).to.equal("test response");
+    });
   });
 });

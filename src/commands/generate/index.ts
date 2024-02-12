@@ -68,7 +68,7 @@ export function generateCommandCallback() {
 export function createPrompt(request: string, context: string): string {
   const templates = getWorkspaceConfig<Record<string, string>>("generate.promptTemplates");
   const templateKey = context ? "generateWithContext" : "generate";
-  const template = templates?.[templateKey] || "";
+  const template = templates[templateKey];
 
   return template.replace("{REQUEST}", request).replace("{CONTEXT}", context);
 }

@@ -19,6 +19,7 @@ export abstract class Generator {
       credentials: fromNodeProviderChain({
         profile: getWorkspaceConfig<string>("profileName"),
       }),
+      region: getWorkspaceConfig<string>("region")
     });
 
     const body = JSON.stringify(this.createRequestBody(prompt));
@@ -44,12 +45,8 @@ export abstract class Generator {
 export class AnthropicClaude extends Generator {
   createRequestBody(prompt: string) {
     return {
-      prompt: prompt,
-      max_tokens_to_sample: getWorkspaceConfig("anthropicClaude.maxTokensToSample"),
-      temperature: getWorkspaceConfig("anthropicClaude.temperature"),
-      top_k: getWorkspaceConfig("anthropicClaude.topK"),
-      top_p: getWorkspaceConfig("anthropicClaude.topP"),
-      stop_sequences: getWorkspaceConfig("anthropicClaude.stopSequences"),
+      prompt,
+      ...getWorkspaceConfig<Record<string, string>>("inferenceParameters.anthropicClaude"),
     };
   }
 
@@ -58,16 +55,13 @@ export class AnthropicClaude extends Generator {
   }
 }
 
-export class AmazonTitan extends Generator {
+export class AmazonTitanText extends Generator {
   createRequestBody(prompt: string) {
     return {
       inputText: prompt,
-      textGenerationConfig: {
-        maxTokenCount: getWorkspaceConfig("amazonTitan.maxTokenCount"),
-        temperature: getWorkspaceConfig("amazonTitan.temperature"),
-        topP: getWorkspaceConfig("amazonTitan.topP"),
-        stopSequences: getWorkspaceConfig("amazonTitan.stopSequences"),
-      },
+      textGenerationConfig: getWorkspaceConfig<Record<string, string>>(
+        "inferenceParameters.amazonTitanText"
+      ),
     };
   }
 
@@ -79,43 +73,8 @@ export class AmazonTitan extends Generator {
 export class AI21Jurassic2 extends Generator {
   createRequestBody(prompt: string) {
     return {
-      prompt: prompt,
-      maxTokens: getWorkspaceConfig("AI21 Jurassic-2.maxTokens"),
-      temperature: getWorkspaceConfig("AI21 Jurassic-2.temperature"),
-      topP: getWorkspaceConfig("AI21 Jurassic-2.topP"),
-      stopSequences: getWorkspaceConfig("AI21 Jurassic-2.stopSequences"),
-      countPenalty: {
-        scale: getWorkspaceConfig("AI21 Jurassic-2.countPenalty.scale"),
-        applyToWhitespaces: getWorkspaceConfig("AI21 Jurassic-2.countPenalty.applyToWhitespaces"),
-        applyToPunctuations: getWorkspaceConfig("AI21 Jurassic-2.countPenalty.applyToPunctuations"),
-        applyToNumbers: getWorkspaceConfig("AI21 Jurassic-2.countPenalty.applyToNumbers"),
-        applyToStopwords: getWorkspaceConfig("AI21 Jurassic-2.countPenalty.applyToStopwords"),
-        applyToEmojis: getWorkspaceConfig("AI21 Jurassic-2.countPenalty.applyToEmojis"),
-      },
-      presencePenalty: {
-        scale: getWorkspaceConfig("AI21 Jurassic-2.presencePenalty.scale"),
-        applyToWhitespaces: getWorkspaceConfig(
-          "AI21 Jurassic-2.presencePenalty.applyToWhitespaces"
-        ),
-        applyToPunctuations: getWorkspaceConfig(
-          "AI21 Jurassic-2.presencePenalty.applyToPunctuations"
-        ),
-        applyToNumbers: getWorkspaceConfig("AI21 Jurassic-2.presencePenalty.applyToNumbers"),
-        applyToStopwords: getWorkspaceConfig("AI21 Jurassic-2.presencePenalty.applyToStopwords"),
-        applyToEmojis: getWorkspaceConfig("AI21 Jurassic-2.presencePenalty.applyToEmojis"),
-      },
-      frequencyPenalty: {
-        scale: getWorkspaceConfig("AI21 Jurassic-2.frequencyPenalty.scale"),
-        applyToWhitespaces: getWorkspaceConfig(
-          "AI21 Jurassic-2.frequencyPenalty.applyToWhitespaces"
-        ),
-        applyToPunctuations: getWorkspaceConfig(
-          "AI21 Jurassic-2.frequencyPenalty.applyToPunctuations"
-        ),
-        applyToNumbers: getWorkspaceConfig("AI21 Jurassic-2.frequencyPenalty.applyToNumbers"),
-        applyToStopwords: getWorkspaceConfig("AI21 Jurassic-2.frequencyPenalty.applyToStopwords"),
-        applyToEmojis: getWorkspaceConfig("AI21 Jurassic-2.frequencyPenalty.applyToEmojis"),
-      },
+      prompt,
+      ...getWorkspaceConfig<Record<string, string>>("inferenceParameters.AI21 Jurassic-2"),
     };
   }
 
@@ -127,14 +86,8 @@ export class AI21Jurassic2 extends Generator {
 export class CohereCommand extends Generator {
   createRequestBody(prompt: string) {
     return {
-      prompt: prompt,
-      temperature: getWorkspaceConfig("cohereCommand.temperature"),
-      p: getWorkspaceConfig("cohereCommand.topP"),
-      k: getWorkspaceConfig("cohereCommand.topK"),
-      max_tokens: getWorkspaceConfig("cohereCommand.maxTokens"),
-      stop_sequences: getWorkspaceConfig("cohereCommand.stopSequences"),
-      return_likelihoods: getWorkspaceConfig("cohereCommand.returnLikelihoods"),
-      truncate: getWorkspaceConfig("cohereCommand.truncate"),
+      prompt,
+      ...getWorkspaceConfig<Record<string, string>>("inferenceParameters.cohereCommand"),
     };
   }
 
@@ -143,13 +96,11 @@ export class CohereCommand extends Generator {
   }
 }
 
-export class Llama2 extends Generator {
+export class MetaLlama2 extends Generator {
   createRequestBody(prompt: string) {
     return {
-      prompt: prompt,
-      temperature: getWorkspaceConfig("bedrockPlayground.llama2.temperature"),
-      top_p: getWorkspaceConfig("bedrockPlayground.llama2.topP"),
-      max_gen_len: getWorkspaceConfig("bedrockPlayground.llama2.maximumLength"),
+      prompt,
+      ...getWorkspaceConfig<Record<string, string>>("inferenceParameters.metaLlama2"),
     };
   }
 
