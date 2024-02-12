@@ -8,9 +8,13 @@ This is an open source project and we would love for you to be involved. To cont
 
 You can install this extension from the [VS Code Extension Marketplace](https://marketplace.visualstudio.com/items?itemName=AmazonWebServices-AISolutionsArchitecture.bedrock-vscode-playground)
 
-This extension uses your local AWS credentials to invoke the Amazon Bedrock service. By default, the extension will use the `default` AWS profile will be used. If you want to change the profile to use, you can update `Bedrock Playground: Profile Name` in your User/Workspace settings.
+This extension uses your local AWS credentials to invoke the Amazon Bedrock service. By default, the extension will use the `default` AWS profile. If you want to change the profile, you can update `Bedrock Playground: Profile Name` in your User/Workspace settings.
 
 ![alt text](media/profileName.png)
+
+The extension will also use the `us-west-2` region by default. To change the region, you can update `Bedrock Playground: Region`.
+
+![alt text](media/region.png)
 
 > ⚠️ By using this tool, you understand that it uses Amazon Bedrock's [InvokeModel](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html) API, which will incur AWS charges. The charges you incur from using Amazon Bedrock will be your responsibility. Please review the latest Amazon Bedrock pricing [here](https://aws.amazon.com/bedrock/pricing/) before using this tool.
 
