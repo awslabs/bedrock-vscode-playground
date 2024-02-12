@@ -2,7 +2,7 @@
   "name": "bedrock-vscode-playground",
   "displayName": "Bedrock Visual Studio Code Playground",
   "description": "Explore and experiment with large language models (LLMs) available in Amazon Bedrock",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "publisher": "AmazonWebServices-AISolutionsArchitecture",
   "engines": {
     "vscode": "^1.82.0"
@@ -41,12 +41,17 @@
           "default": "default",
           "markdownDescription": "AWS profile used to invoke the Amazon Bedrock service. If profile name is not provided or invalid, then the `default` profile is used."
         },
+        "bedrockPlayground.region": {
+          "type": "string",
+          "default": "us-west-2",
+          "markdownDescription": "The AWS region to send requests to."
+        },
         "bedrockPlayground.generate.modelId": {
           "type": "string",
-          "default": "anthropic.claude-instant-v1",
+          "default": "anthropic.claude-v2:1",
           "enum": [
+            "anthropic.claude-v2:1",
             "anthropic.claude-v2",
-            "anthropic.claude-v1",
             "anthropic.claude-instant-v1",
             "cohere.command-text-v14",
             "cohere.command-light-text-v14",
@@ -54,230 +59,96 @@
             "ai21.j2-mid-v1",
             "amazon.titan-text-express-v1",
             "amazon.titan-text-lite-v1",
-            "meta.llama2-13b-chat-v1"
+            "meta.llama2-13b-chat-v1",
+            "meta.llama2-70b-chat-v1"
           ],
           "markdownDescription": "The default model for to use for `Bedrock Playground: Generate` command."
         },
-        "bedrockPlayground.generate.promptTemplate": {
-          "type": "array",
-          "default": [
-            "\n\nHuman: {REQUEST}\nPlease placed your response in <response></response> XML tags.\n\nAssistant:"
-          ],
-          "markdownDescription": "The prompt template when invoking `Bedrock Playground: Generate` **without** context (e.g. highlighted code). Make sure the template contains a `{REQUEST}` placeholder. This placeholder will be substituted with the user's request."
+        "bedrockPlayground.generate.promptTemplates": {
+          "type": "object",
+          "default": {
+            "generate": "\n\nHuman: {REQUEST}\nPlease placed your response in <response></response> XML tags.\n\nAssistant:",
+            "generateWithContext": "\n\nHuman: Use the context wrapped in <context></context> tags to respond to a user's request.\nThe user's request will be wrapped in <request></request> tags.\n<context>{CONTEXT}</context>\n<request>{REQUEST}</request>\nPlease place your response in <response></response> tags.\n\nAssistant:"
+          },
+          "markdownDescription": "The prompt templates used when invoking `Bedrock Playground: Generate`. Each template must contain a `{REQUEST}` placeholder which will be substituted with the user's request. The `generateWithContext` template should also contain a `{CONTEXT}` placeholder, which will be substituted with context from a file."
         },
-        "bedrockPlayground.generate.contextualPromptTemplate": {
-          "type": "array",
-          "default": [
-            "\n\nHuman: Use the context wrapped in <context></context> tags to respond to a user's request.\nThe user's request will be wrapped in <request></request> tags.\n<context>{CONTEXT}</context>\n<request>{REQUEST}</request>\nPlease place your response in <response></response> tags.\n\nAssistant:"
-          ],
-          "markdownDescription": "The prompt template when invoking `Bedrock Playground: Generate` **with** context (e.g. highlighted code). Make sure the template contains a `{REQUEST}` and `{CONTEXT}` placeholder. The `{REQUEST}` placeholder will be substituted with the user's request while the `{CONTEXT}` placeholder will be substituted with context from a file."
+        "bedrockPlayground.inferenceParameters.anthropicClaude": {
+          "type": "object",
+          "default": {
+            "max_tokens_to_sample": 200,
+            "temperature": 0.5,
+            "top_k": 250,
+            "top_p": 1,
+            "stop_sequences": [
+              "\n\nHuman:"
+            ]
+          },
+          "markdownDescription": "[Inference parameters for Anthropic Claude models.](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-claude.html)"
         },
-        "bedrockPlayground.anthropicClaude.maxTokensToSample": {
-          "type": "number",
-          "default": 300,
-          "description": "Specify the maximum number of tokens to use in the generated response. We recommend a limit of 4,000 tokens for optimal performance."
+        "bedrockPlayground.inferenceParameters.AI21 Jurassic-2": {
+          "type": "object",
+          "default": {
+            "temperature": 0.5,
+            "topP": 0.5,
+            "maxTokens": 200,
+            "stopSequences": [],
+            "countPenalty": {
+              "scale": 0,
+              "applyToWhitespaces": false,
+              "applyToPunctuations": false,
+              "applyToNumbers": false,
+              "applyToStopwords": false,
+              "applyToEmojis": false
+            },
+            "presencePenalty": {
+              "scale": 0,
+              "applyToWhitespaces": false,
+              "applyToPunctuations": false,
+              "applyToNumbers": false,
+              "applyToStopwords": false,
+              "applyToEmojis": false
+            },
+            "frequencyPenalty": {
+              "scale": 0,
+              "applyToWhitespaces": false,
+              "applyToPunctuations": false,
+              "applyToNumbers": false,
+              "applyToStopwords": false,
+              "applyToEmojis": false
+            }
+          },
+          "markdownDescription": "[Inference parameters for AI21 Jurassic-2 models.](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-jurassic2.html)"
         },
-        "bedrockPlayground.anthropicClaude.temperature": {
-          "type": "number",
-          "default": 0.5,
-          "description": "Use a lower value to decrease randomness in the response."
+        "bedrockPlayground.inferenceParameters.amazonTitanText": {
+          "type": "object",
+          "default": {
+            "temperature": 0,
+            "topP": 1,
+            "maxTokenCount": 512,
+            "stopSequences": []
+          },
+          "markdownDescription": "[Inference parameters for Amazon Titan Text models.](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-titan-text.html)"
         },
-        "bedrockPlayground.anthropicClaude.topK": {
-          "type": "number",
-          "default": 250,
-          "description": "Specify the number of token choices the model uses to generate the next token."
+        "bedrockPlayground.inferenceParameters.cohereCommand": {
+          "type": "object",
+          "default": {
+            "temperature": 0.9,
+            "p": 0.75,
+            "k": 0,
+            "max_tokens": 20,
+            "stop_sequences": [],
+            "truncate": "END"
+          },
+          "markdownDescription": "[Inference parameters for Cohere Command models.](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-cohere-command.html)"
         },
-        "bedrockPlayground.anthropicClaude.topP": {
-          "type": "number",
-          "default": 1,
-          "description": "Use a lower value to ignore less probable options."
-        },
-        "bedrockPlayground.anthropicClaude.stopSequences": {
-          "type": "array",
-          "default": [
-            "\n\nHuman:"
-          ],
-          "description": "Configure up to four sequences that the model recognizes. After a stop sequence, the model stops generating further tokens. The returned text doesn't contain the stop sequence."
-        },
-        "bedrockPlayground.AI21 Jurassic-2.maxTokens": {
-          "type": "number",
-          "default": 300,
-          "description": "Specify the maximum number of tokens to use in the generated response."
-        },
-        "bedrockPlayground.AI21 Jurassic-2.temperature": {
-          "type": "number",
-          "default": 0.5,
-          "description": "Use a lower value to decrease randomness in the response."
-        },
-        "bedrockPlayground.AI21 Jurassic-2.topP": {
-          "type": "number",
-          "default": 1,
-          "description": "Use a lower value to ignore less probable options."
-        },
-        "bedrockPlayground.AI21 Jurassic-2.stopSequences": {
-          "type": "array",
-          "default": [],
-          "description": "Configure stop sequences that the model recognizes and after which it stops generating further tokens. Press the Enter key to insert a newline character in a stop sequence. Use the Tab key to finish inserting a stop sequence."
-        },
-        "bedrockPlayground.AI21 Jurassic-2.countPenalty.scale": {
-          "type": "number",
-          "default": 0,
-          "description": "Use a higher value to lower the probability of generating new tokens that already appear at least once in the prompt or in the completion. Proportional to the number of appearances."
-        },
-        "bedrockPlayground.AI21 Jurassic-2.countPenalty.applyToWhitespaces": {
-          "type": "boolean",
-          "default": false,
-          "description": "Penalize whitespaces."
-        },
-        "bedrockPlayground.AI21 Jurassic-2.countPenalty.applyToPunctuations": {
-          "type": "boolean",
-          "default": false,
-          "description": "Penalize punctuations."
-        },
-        "bedrockPlayground.AI21 Jurassic-2.countPenalty.applyToNumbers": {
-          "type": "boolean",
-          "default": false,
-          "description": "Penalize numbers."
-        },
-        "bedrockPlayground.AI21 Jurassic-2.countPenalty.applyToStopwords": {
-          "type": "boolean",
-          "default": false,
-          "description": "Penalize stop words."
-        },
-        "bedrockPlayground.AI21 Jurassic-2.countPenalty.applyToEmojis": {
-          "type": "boolean",
-          "default": false,
-          "description": "Penalize emojis."
-        },
-        "bedrockPlayground.AI21 Jurassic-2.presencePenalty.scale": {
-          "type": "number",
-          "default": 0,
-          "description": "Use a higher value to lower the probability of generating new tokens that already appear at least once in the prompt or in the completion."
-        },
-        "bedrockPlayground.AI21 Jurassic-2.presencePenalty.applyToWhitespaces": {
-          "type": "boolean",
-          "default": false,
-          "description": "Penalize whitespaces."
-        },
-        "bedrockPlayground.AI21 Jurassic-2.presencePenalty.applyToPunctuations": {
-          "type": "boolean",
-          "default": false,
-          "description": "Penalize punctuations."
-        },
-        "bedrockPlayground.AI21 Jurassic-2.presencePenalty.applyToNumbers": {
-          "type": "boolean",
-          "default": false,
-          "description": "Penalize numbers."
-        },
-        "bedrockPlayground.AI21 Jurassic-2.presencePenalty.applyToStopwords": {
-          "type": "boolean",
-          "default": false,
-          "description": "Penalize stop words."
-        },
-        "bedrockPlayground.AI21 Jurassic-2.presencePenalty.applyToEmojis": {
-          "type": "boolean",
-          "default": false,
-          "description": "Penalize emojis."
-        },
-        "bedrockPlayground.AI21 Jurassic-2.frequencyPenalty.scale": {
-          "type": "number",
-          "default": 0,
-          "description": "Use a high value to lower the probability of generating new tokens that already appear at least once in the prompt or in the completion. The value is proportional to the frequency of the token appearances (normalized to text length)."
-        },
-        "bedrockPlayground.AI21 Jurassic-2.frequencyPenalty.applyToWhitespaces": {
-          "type": "boolean",
-          "default": false,
-          "description": "Penalize whitespaces."
-        },
-        "bedrockPlayground.AI21 Jurassic-2.frequencyPenalty.applyToPunctuations": {
-          "type": "boolean",
-          "default": false,
-          "description": "Penalize punctuations."
-        },
-        "bedrockPlayground.AI21 Jurassic-2.frequencyPenalty.applyToNumbers": {
-          "type": "boolean",
-          "default": false,
-          "description": "Penalize numbers."
-        },
-        "bedrockPlayground.AI21 Jurassic-2.frequencyPenalty.applyToStopwords": {
-          "type": "boolean",
-          "default": false,
-          "description": "Penalize stop words."
-        },
-        "bedrockPlayground.AI21 Jurassic-2.frequencyPenalty.applyToEmojis": {
-          "type": "boolean",
-          "default": false,
-          "description": "Penalize emojis."
-        },
-        "bedrockPlayground.amazonTitan.temperature": {
-          "type": "number",
-          "default": 0,
-          "description": "Use a lower value to decrease randomness in the response."
-        },
-        "bedrockPlayground.amazonTitan.topP": {
-          "type": "number",
-          "default": 1,
-          "description": "Use a lower value to ignore less probable options."
-        },
-        "bedrockPlayground.amazonTitan.maxTokenCount": {
-          "type": "number",
-          "default": 512,
-          "description": "Specify the maximum number of tokens in the generated response."
-        },
-        "bedrockPlayground.amazonTitan.stopSequences": {
-          "type": "array",
-          "default": [],
-          "markdownDescription": "Specify character sequences to indicate where the model should stop. Use the | (pipe) character to separate different sequences (maximum 20 characters)."
-        },
-        "bedrockPlayground.cohereCommand.temperature": {
-          "type": "number",
-          "default": 0.9,
-          "description": "Use a lower value to decrease randomness in the response."
-        },
-        "bedrockPlayground.cohereCommand.topP": {
-          "type": "number",
-          "default": 0.75,
-          "description": "Use a lower value to ignore less probable options. Set to 0 or 1.0 to disable. If both Top P and Top K are enabled, Top P acts after Top K."
-        },
-        "bedrockPlayground.cohereCommand.topK": {
-          "type": "number",
-          "default": 0,
-          "description": "Specify the number of token choices the model uses to generate the next token. If both Top P and Top K are enabled, Top P acts after Top K."
-        },
-        "bedrockPlayground.cohereCommand.maxTokens": {
-          "type": "number",
-          "default": 20,
-          "description": "Specify the maximum number of tokens to use in the generated response."
-        },
-        "bedrockPlayground.cohereCommand.stopSequences": {
-          "type": "array",
-          "default": [],
-          "description": "Configure up to four sequences that the model recognizes. After a stop sequence, the model stops generating further tokens. The returned text doesn't contain the stop sequence."
-        },
-        "bedrockPlayground.cohereCommand.returnLikelihoods": {
-          "type": "string",
-          "default": "NONE",
-          "markdownDescription": "Specify how and if the token likelihoods are returned with the response. You can specify the following options:\n- `GENERATION` - Only return likelihoods for generated tokens.\n- `ALL` - Return likelihoods for all tokens.\n- `NONE` - Don't return any likelihoods."
-        },
-        "bedrockPlayground.cohereCommand.truncate": {
-          "type": "string",
-          "default": "END",
-          "markdownDescription": "Specifies how the API handles inputs longer than the maximum token length. Use one of the following:\n- `NONE` - Returns an error when the input exceeds the maximum input token length.\n- `START` - Discard the start of the input\n- `END` - Discards the end of the input."
-        },
-        "bedrockPlayground.llama2.temperature": {
-          "type": "number",
-          "default": 0.5,
-          "markdownDescription": "Use a lower value to decrease randomness in the response."
-        },
-        "bedrockPlayground.llama2.topP": {
-          "type": "number",
-          "default": 0.5,
-          "markdownDescription": " Use a lower value to ignore less probable options. Set to 0 or 1.0 to disable."
-        },
-        "bedrockPlayground.llama2.maximumLength": {
-          "type": "number",
-          "default": 512,
-          "markdownDescription": "Specify the maximum number of tokens to use in the generated response. The model truncates the response once the generated text exceeds this value."
+        "bedrockPlayground.inferenceParameters.metaLlama2": {
+          "type": "object",
+          "default": {
+            "temperature": 0.5,
+            "top_p": 0.9,
+            "max_gen_len": 512
+          },
+          "markdownDescription": "[Inference parameters for Meta Llama 2 models.](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-meta.html)"
         }
       }
     },
@@ -328,10 +199,10 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "@aws-sdk/client-bedrock": "^3.451.0",
-    "@aws-sdk/client-bedrock-runtime": "^3.451.0",
-    "@aws-sdk/credential-providers": "^3.451.0",
-    "@aws-sdk/types": "^3.451.0",
+    "@aws-sdk/client-bedrock": "^3.509.0",
+    "@aws-sdk/client-bedrock-runtime": "^3.509.0",
+    "@aws-sdk/credential-providers": "^3.509.0",
+    "@aws-sdk/types": "^3.509.0",
     "@smithy/util-stream": "^2.0.20",
     "@vscode/webview-ui-toolkit": "^1.2.2"
   }

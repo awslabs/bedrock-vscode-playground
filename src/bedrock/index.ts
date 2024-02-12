@@ -1,4 +1,10 @@
-import { AnthropicClaude, CohereCommand, AI21Jurassic2, AmazonTitan, Llama2 } from "./generator";
+import {
+  AnthropicClaude,
+  CohereCommand,
+  AI21Jurassic2,
+  AmazonTitanText,
+  MetaLlama2,
+} from "./generator";
 
 export function createGenerator(modelId: string) {
   switch (modelId) {
@@ -14,10 +20,10 @@ export function createGenerator(modelId: string) {
       return new AI21Jurassic2(modelId);
     case "amazon.titan-text-lite-v1":
     case "amazon.titan-text-express-v1":
-      return new AmazonTitan(modelId);
+      return new AmazonTitanText(modelId);
     case "meta.llama2-13b-chat-v1":
     case "meta.llama2-70b-chat-v1":
-      return new Llama2(modelId);
+      return new MetaLlama2(modelId);
     default:
       throw new Error("Model is invalid or not supported.");
   }
