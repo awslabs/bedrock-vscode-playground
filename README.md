@@ -8,11 +8,11 @@ This is an open source project and we would love for you to be involved. To cont
 
 You can install this extension from the [VS Code Extension Marketplace](https://marketplace.visualstudio.com/items?itemName=AmazonWebServices-AISolutionsArchitecture.bedrock-vscode-playground)
 
-This extension uses your local AWS credentials to invoke the Amazon Bedrock service. By default, the extension will use the `default` AWS profile. If you want to change the profile, you can update `Bedrock Playground: Profile Name` in your User/Workspace settings.
+This extension uses your local AWS credentials to invoke the Amazon Bedrock service. By default, the extension will use the `default` AWS profile. If you want to change the profile, you can update the `bedrockPlayground.profileName` setting in your User/Workspace settings.
 
 ![alt text](media/profileName.png)
 
-The extension will also use the `us-west-2` region by default. To change the region, you can update `Bedrock Playground: Region`.
+The extension will also use the `us-west-2` region by default. To change the region, you can update the `bedrockPlayground.region` setting.
 
 ![alt text](media/region.png)
 
@@ -32,7 +32,7 @@ You can adjust the inference parameters for each model by configuring your User/
 
 ### 2. Generate
 
-You can use the `Bedrock Playground: Generate` command to use a LLM from Amazon Bedrock to generate text. You can configure which model to use by updating the setting `BedrockPlayground > Generate: Model ID`.
+You can use the `Bedrock Playground: Generate` command to use a LLM from Amazon Bedrock to generate text. You can configure which model to use by updating the setting `bedrockPlayground.generate.modelId`.
 
 ![alt text](media/generateModelId.png)
 
@@ -46,13 +46,19 @@ You can also provide context from an active text editor when using the `Bedrock 
 
 #### Customize prompt templates
 
-You can customize the prompt templates that are used with the generate command. To customize the template used when there is no context, you should update the setting `Bedrock Playground › Generate: Prompt Template`. The template string should contain a `{REQUEST}` placeholder which will be substituted with the user's request. For example:
+The `Bedrock Playground: Generate` command uses prompt templates to customize the text it generates. To get the best results from your model, you may want to update the prompt templates. The default templates are designed for Anthropic's Claude model. If you are using a different model, tweak the templates in the `bedrockPlayground.generate.promptTemplates` based on the model provider's guidance on prompting.
 
-`"\n\nHuman: {REQUEST}\nPlease place your response in <response></response> XML tags.\n\nAssistant:"`
+To customize the template used when there is no context, you should update the `generate` template. This template string **must** contain a `{REQUEST}` placeholder which will be substituted with the user's request. For example:
 
-To customize the prompt template that is used when context is provided, you should update the setting `Bedrock Playground › Generate: Contextual Prompt Template`. The template should contain both a `{REQUEST}` placeholder as well as a `{CONTEXT}` placeholder. For example:
+```
+"\n\nHuman: {REQUEST}\nPlease place your response in <response></response> XML tags.\n\nAssistant:"
+```
 
-`"\n\nHuman: Use the context wrapped in <context></context> tags to respond to a user's request.\nThe user's request will be wrapped in <request></request> tags.\n<context>{CONTEXT}</context>\n<request>{REQUEST}</request>\nPlease place your response in <response></response> tags.\n\nAssistant:"`
+To customize the prompt template that is used when context is provided, you should update the `generateWithContext` template. This template **must** contain both a `{REQUEST}` placeholder as well as a `{CONTEXT}` placeholder. For example:
+
+```
+"\n\nHuman: Use the context wrapped in <context></context> tags to respond to a user's request.\nThe user's request will be wrapped in <request></request> tags.\n<context>{CONTEXT}</context>\n<request>{REQUEST}</request>\nPlease place your response in <response></response> tags.\n\nAssistant:"
+```
 
 ## Creators
 
