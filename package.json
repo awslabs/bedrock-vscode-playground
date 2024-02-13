@@ -2,7 +2,7 @@
   "name": "bedrock-vscode-playground",
   "displayName": "Bedrock Visual Studio Code Playground",
   "description": "Explore and experiment with large language models (LLMs) available in Amazon Bedrock",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "publisher": "AmazonWebServices-AISolutionsArchitecture",
   "engines": {
     "vscode": "^1.82.0"
