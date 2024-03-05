@@ -5,13 +5,11 @@ import {
   AmazonTitanText,
   MetaLlama2,
   Mistral,
-  AnthropicClaude3,
 } from "./generator";
 
 export function createGenerator(modelId: string) {
   switch (modelId) {
     case "anthropic.claude-3-sonnet-20240229-v1:0":
-      return new AnthropicClaude3(modelId);
     case "anthropic.claude-v2:1":
     case "anthropic.claude-v2":
     case "anthropic.claude-instant-v1":

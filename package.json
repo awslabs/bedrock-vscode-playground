@@ -78,7 +78,9 @@
         "bedrockPlayground.inferenceParameters.anthropicClaude": {
           "type": "object",
           "default": {
-            "max_tokens_to_sample": 200,
+            "max_tokens": 500,
+            "anthropic_version": "bedrock-2023-05-31",
+            "system": "",
             "temperature": 0.5,
             "top_k": 250,
             "top_p": 1,
@@ -86,20 +88,7 @@
               "\n\nHuman:"
             ]
           },
-          "markdownDescription": "[Inference parameters for Anthropic Claude models.](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-claude.html)"
-        },
-        "bedrockPlayground.inferenceParameters.anthropicClaude3Sonnet": {
-          "type": "object",
-          "default": {
-            "max_tokens": 1000,
-            "anthropic_version": "bedrock-2023-05-31",
-            "temperature": 1,
-            "top_k": 250,
-            "top_p": 0.999,
-            "stop_sequences": [
-            ]
-          },
-          "markdownDescription": "[Inference parameters for Anthropic Claude models.](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-claude.html)"
+          "markdownDescription": "[Inference parameters for Anthropic Claude models.](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-anthropic-claude-messages.html#model-parameters-anthropic-claude-messages-request-response)"
         },
         "bedrockPlayground.inferenceParameters.AI21 Jurassic-2": {
           "type": "object",

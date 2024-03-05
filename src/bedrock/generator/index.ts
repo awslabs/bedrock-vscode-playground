@@ -42,24 +42,12 @@ export abstract class Generator {
   }
 }
 
+
 export class AnthropicClaude extends Generator {
   createRequestBody(prompt: string) {
     return {
-      prompt,
-      ...getWorkspaceConfig<Record<string, string>>("inferenceParameters.anthropicClaude"),
-    };
-  }
-
-  extractResponse(completionResponse: Record<"completion", string>): string {
-    return completionResponse.completion;
-  }
-}
-
-export class AnthropicClaude3 extends Generator {
-  createRequestBody(prompt: string) {
-    return {
       ...getWorkspaceConfig<Record<string, string>>(
-        "inferenceParameters.anthropicClaude3Sonnet"
+        "inferenceParameters.anthropicClaude"
       ),
       "messages": [
         {
