@@ -7,7 +7,7 @@ export const titanTextExpressModelCard = `
 <p> Titan Text Generation 1 (G1) - Express is a generative large language model (LLM) for tasks such as summarization, text generation (for example, creating a blog post), classification, open-ended Q&A, and information extraction.
 
     <ul>
-        <li> Version: 1 (preview)</li>
+        <li> Version: 1 (preview) </li>
         <li> Max tokens: 8k </li>
         <li> Languages: English </li>
         <li> Supported formats: Open ended text generation, brainstorming, summarization, code generation, table creation, data formatting, paraphrasing, chain of thought, rewrite, extraction, Q&A, chat </li>
@@ -24,7 +24,7 @@ export const titanTextLiteModelCard = `
 <p> Titan Text Generation 1 (G1) - Lite is a generative large language model (LLM) for tasks such as summarization, text generation (for example, creating a blog post), classification, open-ended Q&A, and information extraction.
 
     <ul>
-        <li> Version: 1 (preview)</li>
+        <li> Version: 1.0 (preview) </li>
         <li> Max tokens: 4k </li>
         <li> Languages: English </li>
         <li> Supported formats: Open ended text generation, brainstorming, summarization, code generation, table creation, data formatting, paraphrasing, chain of thought, rewrite, extraction, Q&A, chat </li>
@@ -36,11 +36,11 @@ export const titanTextLiteModelCard = `
 export const claude_2_ModelCard = `
 <p> Anthropic's most powerful model, which excels at a wide range of tasks from sophisticated dialogue and creative content generation to detailed instruction following.
     <ul>
-        <li> Version: 2</li>
+        <li> Version: 2.0 </li>
         <li> Max tokens: 100k </li>
         <li> Languages: Multilingual </li>
         <li> Supported use cases: Question answering, information extraction, removing PII, content generation, multiple choice classification, Roleplay, comparing text, summarization, document Q&A with citation </li>
-        <li> Text generation, Conversational </li>
+        <li> Model attributes: Text generation, Conversational </li>
     </ul>
 </p>
 `;
@@ -48,11 +48,23 @@ export const claude_2_ModelCard = `
 export const claude_2_1_ModelCard = `
 <p> An update to Claude 2 that features double the context window, plus improvements across reliability, hallucination rates, and evidence-based accuracy in long document and RAG contexts.
     <ul>
-        <li> Version: 2.1</li>
+        <li> Version: 2.1 </li>
         <li> Max tokens: 200k </li>
         <li> Languages: Multilingual </li>
         <li> Supported use cases: Question answering, information extraction, removing PII, content generation, multiple choice classification, Roleplay, comparing text, summarization, document Q&A with citation </li>
-        <li> Text generation, Conversation, Complex reasoning & analysis </li>
+        <li> Model attributes: Text generation, Conversation, Complex reasoning & analysis </li>
+    </ul>
+</p>
+`;
+
+export const claude_3_Sonnet_ModelCard = `
+<p> Claude 3 Sonnet by Anthropic strikes the ideal balance between intelligence and speed—particularly for enterprise workloads. It offers maximum utility at a lower price than competitors, and is engineered to be the dependable, high-endurance workhorse for scaled AI deployments. Claude 3 Sonnet can process images and return text outputs, and features a 200K context window.
+    <ul>
+        <li> Version: 1.0 </li>
+        <li> Max tokens: 200k </li>
+        <li> Languages: Multilingual </li>
+        <li> Supported use cases: RAG or search & retrieval over vast amounts of knowledge, product recommendations, forecasting, targeted marketing, code generation, quality control, parse text from images </li>
+        <li> Model attributes: Image to text & code, multilingual conversation, complex reasoning & analysis </li>
     </ul>
 </p>
 `;
@@ -60,11 +72,11 @@ export const claude_2_1_ModelCard = `
 export const claudeInstantModelCard = `
 <p> A faster and cheaper yet still very capable model, which can handle a range of tasks including casual dialogue, text analysis, summarization, and document question-answering.
     <ul>
-        <li> Version: 1.2</li>
+        <li> Version: 1.2 </li>
         <li> Max tokens: 100k </li>
         <li> Languages: Multilingual </li>
         <li> Supported use cases: Question answering, information extraction, removing PII, content generation, multiple choice classification, Roleplay, comparing text, summarization, document Q&A with citation </li>
-        <li> Text generation, Conversational </li>
+        <li> Model attributes: Text generation, Conversational </li>
     </ul>
 </p>
 `;
@@ -73,7 +85,7 @@ export const commandModelCard = `
 
 <p> Command is a text generation model for business use cases. Command is trained on data that supports reliable business applications, like text generation, summarization, copywriting, dialogue, extraction, and question answering.
     <ul>
-        <li> Version: 14.7</li>
+        <li> Version: 14.7 </li>
         <li> Max tokens: 4096 </li>
         <li> Languages: English </li>
         <li> Supported use cases: Summarization, copywriting, dialogue, extraction, and question answering. </li>
@@ -86,7 +98,7 @@ export const commandLightModelCard = `
 
 <p> Cohere's Command-Light is a generative model that responds well with instruction-like prompts. This model provides customers with an unbeatable balance of quality, cost-effectiveness, and low-latency inference.
     <ul>
-        <li> Version: 14.7</li>
+        <li> Version: 14.7 </li>
         <li> Max tokens: 4000 </li>
         <li> Languages: English </li>
         <li> Supported use cases: Summarization, copywriting, dialogue, extraction, and question answering. </li>
@@ -98,7 +110,7 @@ export const commandLightModelCard = `
 export const jurassicUltraModelCard = `
 <p> Jurassic-2 Ultra is AI21’s most powerful model offering exceptional quality. Apply Jurassic-2 Ultra to complex tasks that require advanced text generation and comprehension. Popular use cases include question answering, summarization, long-form copy generation, advanced information extraction, and more.
     <ul>
-        <li> Version: 1</li>
+        <li> Version: 1.0 </li>
         <li> Max tokens: 8191 </li>
         <li> Languages: English, Spanish, French, German, Portuguese, Italian, Dutch </li>
         <li> Supported use cases: Open book question answering, summarization, draft generation, information extraction, ideation </li>
@@ -110,7 +122,7 @@ export const jurassicUltraModelCard = `
 export const jurassicMidModelCard = `
 <p> Jurassic-2 Mid is AI21’s mid-sized model, carefully designed to strike the right balance between exceptional quality and affordability. Jurassic-2 Mid can be applied to any language comprehension or generation task including question answering, summarization, long-form copy generation, advanced information extraction and many others.
     <ul>
-        <li> Version: 1</li>
+        <li> Version: 1.0 </li>
         <li> Max tokens: 8191 </li>
         <li> Languages: English, Spanish, French, German, Portuguese, Italian, Dutch </li>
         <li> Supported use cases: Open book question answering, summarization, draft generation, information extraction, ideation </li>
@@ -122,12 +134,36 @@ export const jurassicMidModelCard = `
 export const llama_2_ModelCard = `
 <p> A dialogue use case optimized variant of Llama 2 models. Llama 2 is an auto-regressive language model that uses an optimized transformer architecture. Llama 2 is intended for commercial and research use in English.
     <ul>
-        <li> Version: 1</li>
+        <li> Version: 1.0 </li>
         <li> Max tokens: 4096 </li>
-        <li> Languages: English</li>
+        <li> Languages: English </li>
         <li> Supported use cases: Llama 2 is intended for commercial and research use in English. Fine-tuned chat models are intended for chat based applications. </li>
-        <li> Use in any manner that violates applicable laws or regulations (including trade compliance laws). Use in any other way that is prohibited by the Acceptable Use Policy and Llama 2 Community License.</li>
+        <li> Use in any manner that violates applicable laws or regulations (including trade compliance laws). Use in any other way that is prohibited by the Acceptable Use Policy and Llama 2 Community License. </li>
         <li> Model attributes: Text generation, Chat optimized, Conversational </li>
+    </ul>
+</p>
+`;
+
+export const mistral_7b_Instruct_ModelCard = `
+<p> A 7B dense Transformer, fast-deployed and easily customisable. Small, yet powerful for a variety of use cases. Supports English and code, and a 32k context window.
+    <ul>
+        <li> Version: 0.2 </li>
+        <li> Max tokens: 32K </li>
+        <li> Languages: English </li>
+        <li> Supported use cases: Variety </li>
+        <li> Model attributes: Classification, Text generation, Code generation </li>
+    </ul>
+</p>
+`;
+
+export const mistral_8x7b_Instruct_ModelCard = `
+<p> A 7B sparse Mixture-of-Experts model with stronger capabilities than Mistral 7B. Uses 12B active parameters out of 45B total. Supports multiple languages, code and 32k context window.
+    <ul>
+        <li> Version: 0.1 </li>
+        <li> Max tokens: 32K </li>
+        <li> Languages: English </li>
+        <li> Supported use cases: Variety </li>
+        <li> Model attributes: Complex reasoning & analysis, Text generation, Code generation </li>
     </ul>
 </p>
 `;

@@ -55,6 +55,31 @@ export class AnthropicClaude extends Generator {
   }
 }
 
+export class AnthropicClaude3 extends Generator {
+  createRequestBody(prompt: string) {
+    return {
+      ...getWorkspaceConfig<Record<string, string>>(
+        "inferenceParameters.anthropicClaude3Sonnet"
+      ),
+      "messages": [
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": prompt
+            }
+          ]
+        }
+      ],
+    };
+  }
+
+  extractResponse(completionResponse: Record<"content", { text: string }[]>): string {
+    return completionResponse.content[0].text;
+  }
+}
+
 export class AmazonTitanText extends Generator {
   createRequestBody(prompt: string) {
     return {
@@ -106,5 +131,18 @@ export class MetaLlama2 extends Generator {
 
   extractResponse(responseBody: Record<"generation", string>): string {
     return responseBody.generation;
+  }
+}
+
+export class Mistral extends Generator {
+  createRequestBody(prompt: string) {
+    return {
+      prompt,
+      ...getWorkspaceConfig<Record<string, string>>("inferenceParameters.mistral"),
+    };
+  }
+
+  extractResponse(responseBody: Record<"outputs", { text: string }[]>): string {
+    return responseBody.outputs[0].text;
   }
 }

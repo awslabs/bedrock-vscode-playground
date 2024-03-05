@@ -38,6 +38,7 @@ export function getWebviewContent(
                         <vscode-dropdown id="llm">
                             <vscode-option value="anthropic.claude-v2:1">Anthropic Claude v2.1</vscode-option>
                             <vscode-option value="anthropic.claude-v2">Anthropic Claude v2</vscode-option>
+                            <vscode-option value="anthropic.claude-3-sonnet-20240229-v1:0">Anthropic Claude v3 Sonnet</vscode-option>
                             <vscode-option value="anthropic.claude-instant-v1">Anthropic Claude Instant</vscode-option>
                             <vscode-option value="cohere.command-text-v14">Cohere Command</vscode-option>
                             <vscode-option value="cohere.command-light-text-v14">Cohere Command Light</vscode-option>
@@ -47,6 +48,8 @@ export function getWebviewContent(
                             <vscode-option value="amazon.titan-text-lite-v1">Amazon Titan Text G1 - Lite</vscode-option>
                             <vscode-option value="meta.llama2-13b-chat-v1">Meta Llama 2 Chat 13B</vscode-option>
                             <vscode-option value="meta.llama2-70b-chat-v1">Meta Llama 2 Chat 70B</vscode-option>
+                            <vscode-option value="mistral.mistral-7b-instruct-v0:2">Mistral 7B Instruct</vscode-option>
+                            <vscode-option value="mistral.mixtral-8x7b-instruct-v0:1">Mistral 8x7B Instruct</vscode-option>
                         </vscode-dropdown>
                     </div>
                 </div>

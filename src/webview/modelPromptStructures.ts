@@ -4,4 +4,4 @@ export const claude_2_promptStructure = `Human:
 Assistant:
 `;
 
-export const notClaudeCommandPromptStructure = ``;
+export const notClaude2CommandPromptStructure = ``;

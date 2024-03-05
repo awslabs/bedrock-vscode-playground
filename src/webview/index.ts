@@ -25,19 +25,23 @@ import {
   titanTextLiteModelCard,
   claude_2_ModelCard,
   claude_2_1_ModelCard,
+  claude_3_Sonnet_ModelCard,
   claudeInstantModelCard,
   commandModelCard,
   commandLightModelCard,
   jurassicUltraModelCard,
   jurassicMidModelCard,
   llama_2_ModelCard,
+  mistral_7b_Instruct_ModelCard,
+  mistral_8x7b_Instruct_ModelCard,
 } from "./modelCards";
 
-import { claude_2_promptStructure, notClaudeCommandPromptStructure } from "./modelPromptStructures";
+import { claude_2_promptStructure, notClaude2CommandPromptStructure } from "./modelPromptStructures";
 
 export const modelCardMapping: Record<string, string> = {
   "anthropic.claude-v2": claude_2_ModelCard,
   "anthropic.claude-v2:1": claude_2_1_ModelCard,
+  "anthropic.claude-3-sonnet-20240229-v1:0": claude_3_Sonnet_ModelCard,
   "anthropic.claude-instant-v1": claudeInstantModelCard,
   "cohere.command-text-v14": commandModelCard,
   "cohere.command-light-text-v14": commandLightModelCard,
@@ -47,21 +51,26 @@ export const modelCardMapping: Record<string, string> = {
   "amazon.titan-text-lite-v1": titanTextLiteModelCard,
   "meta.llama2-13b-chat-v1": llama_2_ModelCard,
   "meta.llama2-70b-chat-v1": llama_2_ModelCard,
+  "mistral.mistral-7b-instruct-v0:2": mistral_7b_Instruct_ModelCard,
+  "mistral.mixtral-8x7b-instruct-v0:1": mistral_8x7b_Instruct_ModelCard,
 };
 
 export const modelPromptStructureMapping: Record<string, string> = {
   "anthropic.claude-v2": claude_2_promptStructure,
   "anthropic.claude-v2:1": claude_2_promptStructure,
+  "anthropic.claude-3-sonnet-20240229-v1:0": notClaude2CommandPromptStructure,
   "anthropic.claude-instant-v1": claude_2_promptStructure,
-  "cohere.command-text-v14": notClaudeCommandPromptStructure,
-  "cohere.command-light-text-v14": notClaudeCommandPromptStructure,
-  "ai21.j2-ultra-v1": notClaudeCommandPromptStructure,
-  "ai21.j2-mid-v1": notClaudeCommandPromptStructure,
-  "amazon.titan-text-express-v1": notClaudeCommandPromptStructure,
-  "amazon.titan-text-lite-v1": notClaudeCommandPromptStructure,
-  "meta.llama2-13b-chat-v1": notClaudeCommandPromptStructure,
-  "meta.llama2-70b-chat-v1": notClaudeCommandPromptStructure,
-  "noSelection": notClaudeCommandPromptStructure,
+  "cohere.command-text-v14": notClaude2CommandPromptStructure,
+  "cohere.command-light-text-v14": notClaude2CommandPromptStructure,
+  "ai21.j2-ultra-v1": notClaude2CommandPromptStructure,
+  "ai21.j2-mid-v1": notClaude2CommandPromptStructure,
+  "amazon.titan-text-express-v1": notClaude2CommandPromptStructure,
+  "amazon.titan-text-lite-v1": notClaude2CommandPromptStructure,
+  "meta.llama2-13b-chat-v1": notClaude2CommandPromptStructure,
+  "meta.llama2-70b-chat-v1": notClaude2CommandPromptStructure,
+  "mistral.mistral-7b-instruct-v0:2": notClaude2CommandPromptStructure,
+  "mistral.mixtral-8x7b-instruct-v0:1": notClaude2CommandPromptStructure,
+  "noSelection": notClaude2CommandPromptStructure,
 };
 
 // Get access to the VS Code API from within the webview context
