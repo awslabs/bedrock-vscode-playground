@@ -2,7 +2,7 @@
   "name": "bedrock-vscode-playground",
   "displayName": "Bedrock Visual Studio Code Playground",
   "description": "Explore and experiment with large language models (LLMs) available in Amazon Bedrock",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "publisher": "AmazonWebServices-AISolutionsArchitecture",
   "engines": {
     "vscode": "^1.82.0"
@@ -85,7 +85,6 @@
             "top_k": 250,
             "top_p": 1,
             "stop_sequences": [
-              "\n\nHuman:"
             ]
           },
           "markdownDescription": "[Inference parameters for Anthropic Claude models.](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-anthropic-claude-messages.html#model-parameters-anthropic-claude-messages-request-response)"
@@ -163,7 +162,7 @@
             "top_p": 0.9,
             "top_k": 200 
           },
-          "markdownDescription": "[Inference parameters for Meta Llama 2 models.](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-meta.html)"
+          "markdownDescription": "[Inference parameters for Mistral models.](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-mistral.html#model-parameters-mistral-request-response)"
         }
       }
     },
