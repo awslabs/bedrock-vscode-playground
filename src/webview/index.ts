@@ -97,8 +97,8 @@ function handleRunClick() {
 }
 
 function handleClearClick() {
-  const dropDownElement = document.getElementById("llm") as HTMLDivElement;
-  const selectedLLM = dropDownElement.getAttribute("current-value");
+  const prompt = document.getElementById("promptInput") as HTMLInputElement;
+  prompt.value = '';
 }
 
 function handleCopyClick() {
