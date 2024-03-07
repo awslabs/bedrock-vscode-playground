@@ -69,7 +69,9 @@ suite("bedrock.generator.index", () => {
 
     setup(() => {
       getWorkspaceConfigStub.returns({
-        max_tokens_to_sample: 200,
+        max_tokens: 500,
+        anthropic_version: "bedrock-2023-05-31",
+        system: "",
         temperature: 0.5,
         top_k: 250,
         top_p: 1,
@@ -86,16 +88,18 @@ suite("bedrock.generator.index", () => {
       );
 
       expect(requestBody).to.deep.equal({
-        prompt: "test prompt",
-        max_tokens_to_sample: 200,
+        max_tokens: 500,
+        anthropic_version: "bedrock-2023-05-31",
+        system: "",
         temperature: 0.5,
         top_k: 250,
         top_p: 1,
         stop_sequences: ["\n\nHuman:"],
+        messages: [{'role': 'user', content: [{type: 'text', text: 'test prompt'}]}]
       });
     });
     test("Extract response", () => {
-      const response = generator.extractResponse({ completion: "test response" });
+      const response = generator.extractResponse({ content: [{ text: "test response" }] });
       expect(response).to.equal("test response");
     });
   });

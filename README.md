@@ -51,13 +51,13 @@ The `Bedrock Playground: Generate` command uses prompt templates to customize th
 To customize the template used when there is no context, you should update the `generate` template. This template string **must** contain a `{REQUEST}` placeholder which will be substituted with the user's request. For example:
 
 ```
-"\n\nHuman: {REQUEST}\nPlease place your response in <response></response> XML tags.\n\nAssistant:"
+"{REQUEST}\nPlease place your response in <response></response> XML tags."
 ```
 
 To customize the prompt template that is used when context is provided, you should update the `generateWithContext` template. This template **must** contain both a `{REQUEST}` placeholder as well as a `{CONTEXT}` placeholder. For example:
 
 ```
-"\n\nHuman: Use the context wrapped in <context></context> tags to respond to a user's request.\nThe user's request will be wrapped in <request></request> tags.\n<context>{CONTEXT}</context>\n<request>{REQUEST}</request>\nPlease place your response in <response></response> tags.\n\nAssistant:"
+"Use the context wrapped in <context></context> tags to respond to a user's request.\nThe user's request will be wrapped in <request></request> tags.\n<context>{CONTEXT}</context>\n<request>{REQUEST}</request>\nPlease place your response in <response></response> tags."
 ```
 
 ## Creators

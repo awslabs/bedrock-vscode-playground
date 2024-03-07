@@ -25,19 +25,21 @@ import {
   titanTextLiteModelCard,
   claude_2_ModelCard,
   claude_2_1_ModelCard,
+  claude_3_Sonnet_ModelCard,
   claudeInstantModelCard,
   commandModelCard,
   commandLightModelCard,
   jurassicUltraModelCard,
   jurassicMidModelCard,
   llama_2_ModelCard,
+  mistral_7b_Instruct_ModelCard,
+  mistral_8x7b_Instruct_ModelCard,
 } from "./modelCards";
-
-import { claude_2_promptStructure, notClaudeCommandPromptStructure } from "./modelPromptStructures";
 
 export const modelCardMapping: Record<string, string> = {
   "anthropic.claude-v2": claude_2_ModelCard,
   "anthropic.claude-v2:1": claude_2_1_ModelCard,
+  "anthropic.claude-3-sonnet-20240229-v1:0": claude_3_Sonnet_ModelCard,
   "anthropic.claude-instant-v1": claudeInstantModelCard,
   "cohere.command-text-v14": commandModelCard,
   "cohere.command-light-text-v14": commandLightModelCard,
@@ -47,21 +49,8 @@ export const modelCardMapping: Record<string, string> = {
   "amazon.titan-text-lite-v1": titanTextLiteModelCard,
   "meta.llama2-13b-chat-v1": llama_2_ModelCard,
   "meta.llama2-70b-chat-v1": llama_2_ModelCard,
-};
-
-export const modelPromptStructureMapping: Record<string, string> = {
-  "anthropic.claude-v2": claude_2_promptStructure,
-  "anthropic.claude-v2:1": claude_2_promptStructure,
-  "anthropic.claude-instant-v1": claude_2_promptStructure,
-  "cohere.command-text-v14": notClaudeCommandPromptStructure,
-  "cohere.command-light-text-v14": notClaudeCommandPromptStructure,
-  "ai21.j2-ultra-v1": notClaudeCommandPromptStructure,
-  "ai21.j2-mid-v1": notClaudeCommandPromptStructure,
-  "amazon.titan-text-express-v1": notClaudeCommandPromptStructure,
-  "amazon.titan-text-lite-v1": notClaudeCommandPromptStructure,
-  "meta.llama2-13b-chat-v1": notClaudeCommandPromptStructure,
-  "meta.llama2-70b-chat-v1": notClaudeCommandPromptStructure,
-  "noSelection": notClaudeCommandPromptStructure,
+  "mistral.mistral-7b-instruct-v0:2": mistral_7b_Instruct_ModelCard,
+  "mistral.mixtral-8x7b-instruct-v0:1": mistral_8x7b_Instruct_ModelCard,
 };
 
 // Get access to the VS Code API from within the webview context
@@ -82,7 +71,6 @@ function main() {
   copyButton?.addEventListener("click", handleCopyClick);
   const selectedLLM = "anthropic.claude-v2:1";
   getModelCard(selectedLLM);
-  getPromptStructure(selectedLLM);
 }
 
 export function getModelCard(model: string | null) {
@@ -98,15 +86,6 @@ export function getModelCard(model: string | null) {
   }
 }
 
-export function getPromptStructure(model: string | null) {
-  const prompt = document.getElementById("promptInput") as HTMLInputElement;
-
-  if (model !== null) {
-    const promptStructure = modelPromptStructureMapping[model] || "";
-    prompt.value = promptStructure;
-  }
-}
-
 function handleRunClick() {
   const prompt = document.getElementById("promptInput") as HTMLInputElement;
   const dropDownElement = document.getElementById("llm") as HTMLDivElement;
@@ -118,9 +97,8 @@ function handleRunClick() {
 }
 
 function handleClearClick() {
-  const dropDownElement = document.getElementById("llm") as HTMLDivElement;
-  const selectedLLM = dropDownElement.getAttribute("current-value");
-  getPromptStructure(selectedLLM);
+  const prompt = document.getElementById("promptInput") as HTMLInputElement;
+  prompt.value = '';
 }
 
 function handleCopyClick() {
@@ -134,7 +112,6 @@ window.addEventListener("change", (event) => {
     const selectedLLM = eventTarget.value;
     console.log(selectedLLM);
     getModelCard(selectedLLM);
-    getPromptStructure(selectedLLM);
   }
 });
 

@@ -4,10 +4,12 @@ import {
   AI21Jurassic2,
   AmazonTitanText,
   MetaLlama2,
+  Mistral,
 } from "./generator";
 
 export function createGenerator(modelId: string) {
   switch (modelId) {
+    case "anthropic.claude-3-sonnet-20240229-v1:0":
     case "anthropic.claude-v2:1":
     case "anthropic.claude-v2":
     case "anthropic.claude-instant-v1":
@@ -24,6 +26,9 @@ export function createGenerator(modelId: string) {
     case "meta.llama2-13b-chat-v1":
     case "meta.llama2-70b-chat-v1":
       return new MetaLlama2(modelId);
+    case "mistral.mistral-7b-instruct-v0:2":
+    case "mistral.mixtral-8x7b-instruct-v0:1":
+      return new Mistral(modelId);
     default:
       throw new Error("Model is invalid or not supported.");
   }

@@ -42,16 +42,29 @@ export abstract class Generator {
   }
 }
 
+
 export class AnthropicClaude extends Generator {
   createRequestBody(prompt: string) {
     return {
-      prompt,
-      ...getWorkspaceConfig<Record<string, string>>("inferenceParameters.anthropicClaude"),
+      ...getWorkspaceConfig<Record<string, string>>(
+        "inferenceParameters.anthropicClaude"
+      ),
+      "messages": [
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": prompt
+            }
+          ]
+        }
+      ],
     };
   }
 
-  extractResponse(completionResponse: Record<"completion", string>): string {
-    return completionResponse.completion;
+  extractResponse(completionResponse: Record<"content", { text: string }[]>): string {
+    return completionResponse.content[0].text;
   }
 }
 
@@ -106,5 +119,18 @@ export class MetaLlama2 extends Generator {
 
   extractResponse(responseBody: Record<"generation", string>): string {
     return responseBody.generation;
+  }
+}
+
+export class Mistral extends Generator {
+  createRequestBody(prompt: string) {
+    return {
+      prompt,
+      ...getWorkspaceConfig<Record<string, string>>("inferenceParameters.mistral"),
+    };
+  }
+
+  extractResponse(responseBody: Record<"outputs", { text: string }[]>): string {
+    return responseBody.outputs[0].text;
   }
 }
