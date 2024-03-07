@@ -6,11 +6,13 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## [0.3.0] - 2024-03-07
+
 ## [0.2.1] - 2024-02-13
 
 ### Fixed
 
--  `README` instructions on customizing prompt templates. 
+- `README` instructions on customizing prompt templates.
 
 ## [0.2.0] - 2024-02-12
 
@@ -27,7 +29,6 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - Moved all model inference parameters to VS Code's `setting.json` for better user experience.
 
 - Consolidate prompt template settings to `bedrockPlayground.generate.promptTemplates`.
-
 
 ## [0.1.1] - 2024-02-07
 
