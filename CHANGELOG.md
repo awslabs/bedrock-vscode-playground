@@ -8,6 +8,14 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [0.3.0] - 2024-03-07
 
+### Added
+
+- Support for: Claude 3 Sonnet, Mistral 7B Instruct and Mistral 8x7B Instruct
+
+### Changed
+
+- Inference parameters for Claude models now follow the [Messages API](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-anthropic-claude-messages.html#model-parameters-anthropic-claude-messages-request-response)
+
 ## [0.2.1] - 2024-02-13
 
 ### Fixed
