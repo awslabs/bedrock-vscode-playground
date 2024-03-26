@@ -6,6 +6,12 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## [0.4.0] - 2024-03-26
+
+### Added
+
+- Support for: Claude 3 Haiku
+
 ## [0.3.0] - 2024-03-07
 
 ### Added

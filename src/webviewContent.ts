@@ -39,6 +39,7 @@ export function getWebviewContent(
                             <vscode-option value="anthropic.claude-v2:1">Anthropic Claude v2.1</vscode-option>
                             <vscode-option value="anthropic.claude-v2">Anthropic Claude v2</vscode-option>
                             <vscode-option value="anthropic.claude-3-sonnet-20240229-v1:0">Anthropic Claude v3 Sonnet</vscode-option>
+                            <vscode-option value="anthropic.claude-3-haiku-20240307-v1:0">Anthropic Claude v3 Haiku</vscode-option>
                             <vscode-option value="anthropic.claude-instant-v1">Anthropic Claude Instant</vscode-option>
                             <vscode-option value="cohere.command-text-v14">Cohere Command</vscode-option>
                             <vscode-option value="cohere.command-light-text-v14">Cohere Command Light</vscode-option>
