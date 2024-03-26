@@ -69,6 +69,18 @@ export const claude_3_Sonnet_ModelCard = `
 </p>
 `;
 
+export const claude_3_Haiku_ModelCard = `
+<p> Claude 3 Haiku is Anthropic's fastest, most compact model for near-instant responsiveness. It answers simple queries and requests with speed. Customers will be able to build seamless AI experiences that mimic human interactions. Claude 3 Haiku can process images and return text outputs, and features a 200K context window.
+    <ul>
+        <li> Version: 1.0 </li>
+        <li> Max tokens: 200k </li>
+        <li> Languages: Multilingual </li>
+        <li> Supported use cases: 1/ Customer interactions: quick and accurate support in live interactions, translations 2/ Content moderation: catch risky behavior or customer requests 3/ Cost-saving tasks: optimized logistics, inventory management, extract knowledge from unstructured data </li>
+        <li> Model attributes: Image to text, conversation, chat optimized </li>
+    </ul>
+</p>
+`
+
 export const claudeInstantModelCard = `
 <p> A faster and cheaper yet still very capable model, which can handle a range of tasks including casual dialogue, text analysis, summarization, and document question-answering.
     <ul>

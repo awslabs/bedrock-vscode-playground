@@ -2,7 +2,7 @@
   "name": "bedrock-vscode-playground",
   "displayName": "Bedrock Visual Studio Code Playground",
   "description": "Explore and experiment with large language models (LLMs) available in Amazon Bedrock",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "publisher": "AmazonWebServices-AISolutionsArchitecture",
   "engines": {
     "vscode": "^1.82.0"
@@ -51,6 +51,7 @@
           "default": "anthropic.claude-v2:1",
           "enum": [
             "anthropic.claude-3-sonnet-20240229-v1:0",
+            "anthropic.claude-3-haiku-20240307-v1:0",
             "anthropic.claude-v2:1",
             "anthropic.claude-v2",
             "anthropic.claude-instant-v1",
