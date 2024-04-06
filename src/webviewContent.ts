@@ -51,6 +51,7 @@ export function getWebviewContent(
                             <vscode-option value="meta.llama2-70b-chat-v1">Meta Llama 2 Chat 70B</vscode-option>
                             <vscode-option value="mistral.mistral-7b-instruct-v0:2">Mistral 7B Instruct</vscode-option>
                             <vscode-option value="mistral.mixtral-8x7b-instruct-v0:1">Mistral 8x7B Instruct</vscode-option>
+                            <vscode-option value="mistral.mistral-large-2402-v1:0">Mistral Large</vscode-option>
                         </vscode-dropdown>
                     </div>
                 </div>

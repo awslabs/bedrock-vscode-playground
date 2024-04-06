@@ -29,6 +29,7 @@ export function createGenerator(modelId: string) {
       return new MetaLlama2(modelId);
     case "mistral.mistral-7b-instruct-v0:2":
     case "mistral.mixtral-8x7b-instruct-v0:1":
+    case "mistral.mistral-large-2402-v1:0":
       return new Mistral(modelId);
     default:
       throw new Error("Model is invalid or not supported.");

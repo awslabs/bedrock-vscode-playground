@@ -35,6 +35,7 @@ import {
   llama_2_ModelCard,
   mistral_7b_Instruct_ModelCard,
   mistral_8x7b_Instruct_ModelCard,
+  mistral_Large_ModelCard,
 } from "./modelCards";
 
 export const modelCardMapping: Record<string, string> = {
@@ -53,6 +54,7 @@ export const modelCardMapping: Record<string, string> = {
   "meta.llama2-70b-chat-v1": llama_2_ModelCard,
   "mistral.mistral-7b-instruct-v0:2": mistral_7b_Instruct_ModelCard,
   "mistral.mixtral-8x7b-instruct-v0:1": mistral_8x7b_Instruct_ModelCard,
+  "mistral.mistral-large-2402-v1:0": mistral_Large_ModelCard,
 };
 
 // Get access to the VS Code API from within the webview context

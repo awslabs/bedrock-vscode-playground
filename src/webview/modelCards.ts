@@ -179,3 +179,15 @@ export const mistral_8x7b_Instruct_ModelCard = `
     </ul>
 </p>
 `;
+
+export const mistral_Large_ModelCard = `
+<p> The most advanced Mistral AI Large Language model capable of handling any language task including complex multilingual reasoning, text understanding, transformation, and code generation.
+    <ul>
+        <li> Version: 1.0 </li>
+        <li> Max tokens: 32K </li>
+        <li> Languages: English, French, Italian, German and Spanish</li>
+        <li> Supported use cases: Variety </li>
+        <li> Model attributes: Complex reasoning & analysis, Text generation, Code generation, RAG, Agents </li>
+    </ul>
+</p>
+`;
