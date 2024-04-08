@@ -6,6 +6,12 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## [0.5.0] - 2024-04-05
+
+### Added
+
+- Support for: Mistral Large
+
 ## [0.4.0] - 2024-03-26
 
 ### Added
