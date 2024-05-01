@@ -9,6 +9,7 @@ import {
 
 export function createGenerator(modelId: string) {
   switch (modelId) {
+    case "anthropic.claude-3-opus-20240229-v1:0":
     case "anthropic.claude-3-sonnet-20240229-v1:0":
     case "anthropic.claude-3-haiku-20240307-v1:0":
     case "anthropic.claude-v2:1":
@@ -26,6 +27,8 @@ export function createGenerator(modelId: string) {
       return new AmazonTitanText(modelId);
     case "meta.llama2-13b-chat-v1":
     case "meta.llama2-70b-chat-v1":
+    case "meta.llama3-8b-instruct-v1:0":
+    case "meta.llama3-70b-instruct-v1:0":
       return new MetaLlama2(modelId);
     case "mistral.mistral-7b-instruct-v0:2":
     case "mistral.mixtral-8x7b-instruct-v0:1":

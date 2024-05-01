@@ -2,7 +2,7 @@
   "name": "bedrock-vscode-playground",
   "displayName": "Bedrock Visual Studio Code Playground",
   "description": "Explore and experiment with large language models (LLMs) available in Amazon Bedrock",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "publisher": "AmazonWebServices-AISolutionsArchitecture",
   "engines": {
     "vscode": "^1.82.0"
@@ -65,7 +65,10 @@
             "meta.llama2-70b-chat-v1",
             "mistral.mistral-7b-instruct-v0:2",
             "mistral.mixtral-8x7b-instruct-v0:1",
-            "mistral.mistral-large-2402-v1:0"
+            "mistral.mistral-large-2402-v1:0",
+            "meta.llama3-8b-instruct-v1:0",
+            "meta.llama3-70b-instruct-v1:0",
+            "anthropic.claude-3-opus-20240229-v1:0"
           ],
           "markdownDescription": "The default model for to use for `Bedrock Playground: Generate` command."
         },
