@@ -6,6 +6,12 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## [0.6.0] - 2024-05-01
+
+### Added
+
+- Support for: Llama 3 8B Instruct, Llama 3 70B Instruct, Claude 3 Opus
+
 ## [0.5.0] - 2024-04-05
 
 ### Added

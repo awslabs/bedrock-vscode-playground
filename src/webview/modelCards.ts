@@ -81,6 +81,18 @@ export const claude_3_Haiku_ModelCard = `
 </p>
 `
 
+export const claude_3_Opus_ModelCard = `
+<p> Claude 3 Opus is Anthropic's most powerful AI model, with state-of-the-art performance on highly complex tasks. It can navigate open-ended prompts and sight-unseen scenarios with remarkable fluency and human-like understanding. Claude 3 Opus shows us the frontier of what’s possible with generative AI. Claude 3 Opus can process images and return text outputs, and features a 200K context window.
+    <ul>
+        <li> Version: 1.0 </li>
+        <li> Max tokens: 200k </li>
+        <li> Languages: Multilingual </li>
+        <li> Supported use cases: 1/ Task automation: plan and execute complex actions across APIs and databases, interactive coding 2/ R&D: research review, brainstorming and hypothesis generation, drug discovery 3/ Strategy: advanced analysis of charts & graphs, financials and market trends, forecasting </li>
+        <li> Model attributes: Image to text & code, multilingual conversation, complex reasoning & analysis </li>
+    </ul>
+</p>
+`
+
 export const claudeInstantModelCard = `
 <p> A faster and cheaper yet still very capable model, which can handle a range of tasks including casual dialogue, text analysis, summarization, and document question-answering.
     <ul>
@@ -152,6 +164,18 @@ export const llama_2_ModelCard = `
         <li> Supported use cases: Llama 2 is intended for commercial and research use in English. Fine-tuned chat models are intended for chat based applications. </li>
         <li> Use in any manner that violates applicable laws or regulations (including trade compliance laws). Use in any other way that is prohibited by the Acceptable Use Policy and Llama 2 Community License. </li>
         <li> Model attributes: Text generation, Chat optimized, Conversational </li>
+    </ul>
+</p>
+`;
+
+export const llama_3_ModelCard = `
+<p> Meta Llama 3 is an accessible, open large language model (LLM) designed for developers, researchers, and businesses to build, experiment, and responsibly scale their generative AI ideas. Part of a foundational system, it serves as a bedrock for innovation in the global community. Ideal for limited computational power and resources, edge devices, and faster training times.
+    <ul>
+        <li> Version: 1.0 </li>
+        <li> Max tokens: 8000 </li>
+        <li> Languages: English </li>
+        <li> Supported use cases: Llama 3 is intended for commercial and research use in English. Fine-tuned chat models are intended for chat based applications. </li>
+        <li> Model attributes: Text summarization, Text classification, Sentiment analysis, Language modeling, Dialog systems, Code generation, Following instructions, Sentiment analysis with nuances in reasoning, Text classification with improved accuracy and nuance, Text summarization with accuracy and nuance </li>
     </ul>
 </p>
 `;

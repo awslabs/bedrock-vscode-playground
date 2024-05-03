@@ -27,12 +27,14 @@ import {
   claude_2_1_ModelCard,
   claude_3_Sonnet_ModelCard,
   claude_3_Haiku_ModelCard,
+  claude_3_Opus_ModelCard,
   claudeInstantModelCard,
   commandModelCard,
   commandLightModelCard,
   jurassicUltraModelCard,
   jurassicMidModelCard,
   llama_2_ModelCard,
+  llama_3_ModelCard,
   mistral_7b_Instruct_ModelCard,
   mistral_8x7b_Instruct_ModelCard,
   mistral_Large_ModelCard,
@@ -43,6 +45,7 @@ export const modelCardMapping: Record<string, string> = {
   "anthropic.claude-v2:1": claude_2_1_ModelCard,
   "anthropic.claude-3-sonnet-20240229-v1:0": claude_3_Sonnet_ModelCard,
   "anthropic.claude-3-haiku-20240307-v1:0": claude_3_Haiku_ModelCard,
+  "anthropic.claude-3-opus-20240229-v1:0": claude_3_Opus_ModelCard,
   "anthropic.claude-instant-v1": claudeInstantModelCard,
   "cohere.command-text-v14": commandModelCard,
   "cohere.command-light-text-v14": commandLightModelCard,
@@ -52,6 +55,8 @@ export const modelCardMapping: Record<string, string> = {
   "amazon.titan-text-lite-v1": titanTextLiteModelCard,
   "meta.llama2-13b-chat-v1": llama_2_ModelCard,
   "meta.llama2-70b-chat-v1": llama_2_ModelCard,
+  "meta.llama3-8b-instruct-v1:0": llama_3_ModelCard,
+  "meta.llama3-70b-instruct-v1:0": llama_3_ModelCard,
   "mistral.mistral-7b-instruct-v0:2": mistral_7b_Instruct_ModelCard,
   "mistral.mixtral-8x7b-instruct-v0:1": mistral_8x7b_Instruct_ModelCard,
   "mistral.mistral-large-2402-v1:0": mistral_Large_ModelCard,
@@ -73,7 +78,7 @@ function main() {
   runButton?.addEventListener("click", handleRunClick);
   clearButton?.addEventListener("click", handleClearClick);
   copyButton?.addEventListener("click", handleCopyClick);
-  const selectedLLM = "anthropic.claude-v2:1";
+  const selectedLLM = "anthropic.claude-3-opus-20240229-v1:0";
   getModelCard(selectedLLM);
 }
 

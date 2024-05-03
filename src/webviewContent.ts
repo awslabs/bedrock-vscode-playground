@@ -36,10 +36,11 @@ export function getWebviewContent(
                     <div class="dropdown-container">
                         <h3> Select a model </h3>
                         <vscode-dropdown id="llm">
-                            <vscode-option value="anthropic.claude-v2:1">Anthropic Claude v2.1</vscode-option>
-                            <vscode-option value="anthropic.claude-v2">Anthropic Claude v2</vscode-option>
+                            <vscode-option value="anthropic.claude-3-opus-20240229-v1:0">Anthropic Claude v3 Opus</vscode-option>
                             <vscode-option value="anthropic.claude-3-sonnet-20240229-v1:0">Anthropic Claude v3 Sonnet</vscode-option>
                             <vscode-option value="anthropic.claude-3-haiku-20240307-v1:0">Anthropic Claude v3 Haiku</vscode-option>
+                            <vscode-option value="anthropic.claude-v2:1">Anthropic Claude v2.1</vscode-option>
+                            <vscode-option value="anthropic.claude-v2">Anthropic Claude v2</vscode-option>
                             <vscode-option value="anthropic.claude-instant-v1">Anthropic Claude Instant</vscode-option>
                             <vscode-option value="cohere.command-text-v14">Cohere Command</vscode-option>
                             <vscode-option value="cohere.command-light-text-v14">Cohere Command Light</vscode-option>
@@ -49,6 +50,8 @@ export function getWebviewContent(
                             <vscode-option value="amazon.titan-text-lite-v1">Amazon Titan Text G1 - Lite</vscode-option>
                             <vscode-option value="meta.llama2-13b-chat-v1">Meta Llama 2 Chat 13B</vscode-option>
                             <vscode-option value="meta.llama2-70b-chat-v1">Meta Llama 2 Chat 70B</vscode-option>
+                            <vscode-option value="meta.llama3-8b-instruct-v1:0">Meta Llama 3 8B Instruct</vscode-option>
+                            <vscode-option value="meta.llama3-70b-instruct-v1:0">Meta Llama 3 70B Instruct</vscode-option>
                             <vscode-option value="mistral.mistral-7b-instruct-v0:2">Mistral 7B Instruct</vscode-option>
                             <vscode-option value="mistral.mixtral-8x7b-instruct-v0:1">Mistral 8x7B Instruct</vscode-option>
                             <vscode-option value="mistral.mistral-large-2402-v1:0">Mistral Large</vscode-option>
