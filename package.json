@@ -134,6 +134,40 @@
           },
           "markdownDescription": "[Inference parameters for AI21 Jurassic-2 models.](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-jurassic2.html)"
         },
+        "bedrockPlayground.inferenceParameters.AI21 Jamba-Instruct": {
+          "type": "object",
+          "default": {
+            "temperature": 0.5,
+            "top_p": 0.5,
+            "max_tokens": 200,
+            "stop": [],
+            "countPenalty": {
+              "scale": 0,
+              "applyToWhitespaces": false,
+              "applyToPunctuations": false,
+              "applyToNumbers": false,
+              "applyToStopwords": false,
+              "applyToEmojis": false
+            },
+            "presence_penalty": {
+              "scale": 0,
+              "applyToWhitespaces": false,
+              "applyToPunctuations": false,
+              "applyToNumbers": false,
+              "applyToStopwords": false,
+              "applyToEmojis": false
+            },
+            "frequency_penalty": {
+              "scale": 0,
+              "applyToWhitespaces": false,
+              "applyToPunctuations": false,
+              "applyToNumbers": false,
+              "applyToStopwords": false,
+              "applyToEmojis": false
+            }
+          },
+          "markdownDescription": "[Inference parameters for AI21 Jamba-Instruct models.](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-jamba.html)"
+        },
         "bedrockPlayground.inferenceParameters.amazonTitanText": {
           "type": "object",
           "default": {

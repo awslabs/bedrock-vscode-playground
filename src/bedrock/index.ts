@@ -2,6 +2,7 @@ import {
   AnthropicClaude,
   CohereCommand,
   AI21Jurassic2,
+  AI21JambaInstruct,
   AmazonTitanText,
   MetaLlama2,
   Mistral,
@@ -22,8 +23,9 @@ export function createGenerator(modelId: string) {
       return new CohereCommand(modelId);
     case "ai21.j2-ultra-v1":
     case "ai21.j2-mid-v1":
-    case "ai21.jamba-instruct-v1:0":
       return new AI21Jurassic2(modelId);
+    case "ai21.jamba-instruct-v1:0":
+      return new AI21JambaInstruct(modelId);
     case "amazon.titan-text-lite-v1":
     case "amazon.titan-text-express-v1":
       return new AmazonTitanText(modelId);

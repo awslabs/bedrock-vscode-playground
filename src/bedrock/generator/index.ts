@@ -96,6 +96,21 @@ export class AI21Jurassic2 extends Generator {
   }
 }
 
+export class AI21JambaInstruct extends Generator {
+  createRequestBody(prompt: string) {
+    return {
+      "messages": [
+        { "role": "user", "content": prompt }
+      ],
+      ...getWorkspaceConfig<Record<string, string>>("inferenceParameters.AI21 Jamba-Instruct"),
+    };
+  }
+
+  extractResponse(responseBody: Record<"choices", { message: { content: string } }[]>): string {
+    return responseBody.choices[0].message.content;
+  }
+}
+
 export class CohereCommand extends Generator {
   createRequestBody(prompt: string) {
     return {
