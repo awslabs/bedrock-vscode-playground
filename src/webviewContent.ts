@@ -36,6 +36,7 @@ export function getWebviewContent(
                     <div class="dropdown-container">
                         <h3> Select a model </h3>
                         <vscode-dropdown id="llm">
+                            <vscode-option value="anthropic.claude-3-5-sonnet-20240620-v1:0">Anthropic Claude v3.5 Sonnet</vscode-option>
                             <vscode-option value="anthropic.claude-3-opus-20240229-v1:0">Anthropic Claude v3 Opus</vscode-option>
                             <vscode-option value="anthropic.claude-3-sonnet-20240229-v1:0">Anthropic Claude v3 Sonnet</vscode-option>
                             <vscode-option value="anthropic.claude-3-haiku-20240307-v1:0">Anthropic Claude v3 Haiku</vscode-option>
@@ -46,15 +47,20 @@ export function getWebviewContent(
                             <vscode-option value="cohere.command-light-text-v14">Cohere Command Light</vscode-option>
                             <vscode-option value="ai21.j2-ultra-v1">AI21 Jurassic-2 Ultra</vscode-option>
                             <vscode-option value="ai21.j2-mid-v1">AI21 Jurassic-2 Mid</vscode-option>
+                            <vscode-option value="ai21.jamba-instruct-v1:0">AI21 Jamba Instruct</vscode-option>
                             <vscode-option value="amazon.titan-text-express-v1">Amazon Titan Text G1 - Express</vscode-option>
                             <vscode-option value="amazon.titan-text-lite-v1">Amazon Titan Text G1 - Lite</vscode-option>
                             <vscode-option value="meta.llama2-13b-chat-v1">Meta Llama 2 Chat 13B</vscode-option>
                             <vscode-option value="meta.llama2-70b-chat-v1">Meta Llama 2 Chat 70B</vscode-option>
                             <vscode-option value="meta.llama3-8b-instruct-v1:0">Meta Llama 3 8B Instruct</vscode-option>
                             <vscode-option value="meta.llama3-70b-instruct-v1:0">Meta Llama 3 70B Instruct</vscode-option>
+                            <vscode-option value="meta.llama3-1-8b-instruct-v1:0">Meta Llama 3.1 8B Instruct</vscode-option>
+                            <vscode-option value="meta.llama3-1-70b-instruct-v1:0">Meta Llama 3.1 70B Instruct</vscode-option>
+                            <vscode-option value="meta.llama3-1-405b-instruct-v1:0">Meta Llama 3.1 405B Instruct</vscode-option>
                             <vscode-option value="mistral.mistral-7b-instruct-v0:2">Mistral 7B Instruct</vscode-option>
                             <vscode-option value="mistral.mixtral-8x7b-instruct-v0:1">Mistral 8x7B Instruct</vscode-option>
                             <vscode-option value="mistral.mistral-large-2402-v1:0">Mistral Large</vscode-option>
+                            <vscode-option value="mistral.mistral-large-2407-v1:0">Mistral Large 2</vscode-option>
                         </vscode-dropdown>
                     </div>
                 </div>

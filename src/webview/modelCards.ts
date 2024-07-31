@@ -215,3 +215,51 @@ export const mistral_Large_ModelCard = `
     </ul>
 </p>
 `;
+
+export const mistral_Large_2_ModelCard = `
+<p> The most advanced Mistral AI Large Language model capable of handling any language task including complex multilingual reasoning, text understanding, transformation, and code generation.
+    <ul>
+        <li> Version: 1.0 </li>
+        <li> Max tokens: 32K </li>
+        <li> Languages: English, French, Italian, German and Spanish</li>
+        <li> Supported use cases: Variety </li>
+        <li> Model attributes: Complex reasoning & analysis, Text generation, Code generation, RAG, Agents </li>
+    </ul>
+</p>
+`;
+
+export const llama_3_1_ModelCard = `
+<p> The Llama 3.1 offering of multilingual large language models (LLMs) is a collection of pretrained and instruction-tuned generative models in 8B, 70B and 405B sizes (text in/text out). The Llama 3.1 instruction-tuned text only models (8B, 70B, 405B) are optimized for multilingual dialogue use cases and outperform many of the available open source chat models on common industry benchmarks. Llama 3.1 is intended for commercial and research use in multiple languages. Instruction tuned text only models are intended for assistant-like chat, whereas pretrained models can be adapted for a variety of natural language generation tasks. The Llama 3.1 models also support the ability to leverage the outputs of its models to improve other models including synthetic data generation and distillation. Llama 3.1 is an auto-regressive language model that uses an optimized transformer architecture. The tuned versions use supervised fine-tuning (SFT) and reinforcement learning with human feedback (RLHF) to align with human preferences for helpfulness and safety.
+    <ul>
+        <li> Version: 1.0 </li>
+        <li> Max tokens: 128k </li>
+        <li> Languages: English, German, French, Italian, Portuguese, Hindi, Spanish, and Thai </li>
+        <li> Supported use cases: Input modalities: multilingual text; Output modalities: multilingual text and code </li>
+        <li> Model attributes: Ability to follow instructions and tasks, improved reasoning and understanding of nuances and context, and multilingual translation. </li>
+    </ul>
+</p>
+`;
+
+export const jurassicJambaModelCard = `
+<p> The latest Foundation Model from AI21 Labs, Jamba-Instruct offers an impressive 256K context window and delivers the best value per price on core text generation, summarization, and question answering tasks for the enterprise.
+    <ul>
+        <li> Version: 1.0 </li>
+        <li> Max tokens: 256k </li>
+        <li> Languages: English </li>
+        <li> Supported use cases: Customer chatbot, internal agent assist, lengthy document summarization </li>
+        <li> Model attributes: Text generation, Document summarization, Question answering </li>
+    </ul>
+</p>
+`;
+
+export const claude_3_5_Sonnet_ModelCard = `
+<p> Claude 3.5 Sonnet by Anthropic strikes the ideal balance between intelligence and speed—particularly for enterprise workloads. It offers maximum utility at a lower price than competitors, and is engineered to be the dependable, high-endurance workhorse for scaled AI deployments. Claude 3.5 Sonnet can process images and return text outputs, and features a 200K context window.
+    <ul>
+        <li> Version: 1.0 </li>
+        <li> Max tokens: 200k </li>
+        <li> Languages: Multilingual </li>
+        <li> Supported use cases: RAG or search & retrieval over vast amounts of knowledge, product recommendations, forecasting, targeted marketing, code generation, quality control, parse text from images </li>
+        <li> Model attributes: Image to text & code, multilingual conversation, complex reasoning & analysis </li>
+    </ul>
+</p>
+`;
