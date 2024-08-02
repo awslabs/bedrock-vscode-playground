@@ -7,7 +7,7 @@ export const titanTextExpressModelCard = `
 <p> Titan Text Generation 1 (G1) - Express is a generative large language model (LLM) for tasks such as summarization, text generation (for example, creating a blog post), classification, open-ended Q&A, and information extraction.
 
     <ul>
-        <li> Version: 1 (preview) </li>
+        <li> Version: 1 </li>
         <li> Max tokens: 8k </li>
         <li> Languages: English </li>
         <li> Supported formats: Open ended text generation, brainstorming, summarization, code generation, table creation, data formatting, paraphrasing, chain of thought, rewrite, extraction, Q&A, chat </li>
@@ -24,10 +24,27 @@ export const titanTextLiteModelCard = `
 <p> Titan Text Generation 1 (G1) - Lite is a generative large language model (LLM) for tasks such as summarization, text generation (for example, creating a blog post), classification, open-ended Q&A, and information extraction.
 
     <ul>
-        <li> Version: 1.0 (preview) </li>
+        <li> Version: 1.0 </li>
         <li> Max tokens: 4k </li>
         <li> Languages: English </li>
         <li> Supported formats: Open ended text generation, brainstorming, summarization, code generation, table creation, data formatting, paraphrasing, chain of thought, rewrite, extraction, Q&A, chat </li>
+        <li> Model attributes: Text generation, Code generation, Instruction following </li>
+    </ul>
+</p>
+`;
+
+export const titanTextPremierModelCard = `
+<p> AI and ML have been a focus for Amazon for over 20 years, and many of the capabilities customers use with Amazon are driven by ML. Amazon Titan models are built by leveraging Amazon’s decades of experience to make ML accessible to anyone who wants to use it. </p>
+
+<p> Amazon Titan Foundation Models are pre-trained on large datasets, making them powerful, general-purpose models. Use them as is, or customize them by fine tuning the models with your own data for a particular task without annotating large volumes of data.</p>
+
+<p> Titan Text Premier is a powerful and advanced model within the Titan Text family, designed to deliver superior performance across a wide range of enterprise applications. With its cutting-edge capabilities, it offers enhanced accuracy and exceptional results, making it an excellent choice for organizations seeking top-notch text processing solutions.
+
+    <ul>
+        <li> Version: 1.0 </li>
+        <li> Max tokens: 32k </li>
+        <li> Languages: English </li>
+        <li> Supported formats: Open-ended text generation, brainstorming, summarization, code generation, table creation, data formatting, paraphrasing, chain of thought, rewrite, extraction, Q&A, retrieval-augmented generation (RAG), and chat. </li>
         <li> Model attributes: Text generation, Code generation, Instruction following </li>
     </ul>
 </p>

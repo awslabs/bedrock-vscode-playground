@@ -28,6 +28,7 @@ export function createGenerator(modelId: string) {
       return new AI21JambaInstruct(modelId);
     case "amazon.titan-text-lite-v1":
     case "amazon.titan-text-express-v1":
+    case "amazon.titan-text-premier-v1:0":
       return new AmazonTitanText(modelId);
     case "meta.llama2-13b-chat-v1":
     case "meta.llama2-70b-chat-v1":

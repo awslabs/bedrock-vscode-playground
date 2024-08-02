@@ -23,6 +23,7 @@ provideVSCodeDesignSystem().register(
 import {
   titanTextExpressModelCard,
   titanTextLiteModelCard,
+  titanTextPremierModelCard,
   claude_2_ModelCard,
   claude_2_1_ModelCard,
   claude_3_Sonnet_ModelCard,
@@ -57,6 +58,7 @@ export const modelCardMapping: Record<string, string> = {
   "ai21.j2-mid-v1": jurassicMidModelCard,
   "amazon.titan-text-express-v1": titanTextExpressModelCard,
   "amazon.titan-text-lite-v1": titanTextLiteModelCard,
+  "amazon.titan-text-premier-v1:0": titanTextPremierModelCard,
   "meta.llama2-13b-chat-v1": llama_2_ModelCard,
   "meta.llama2-70b-chat-v1": llama_2_ModelCard,
   "meta.llama3-8b-instruct-v1:0": llama_3_ModelCard,

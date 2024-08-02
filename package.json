@@ -61,6 +61,7 @@
             "ai21.j2-mid-v1",
             "amazon.titan-text-express-v1",
             "amazon.titan-text-lite-v1",
+            "amazon.titan-text-premier-v1:0",
             "meta.llama2-13b-chat-v1",
             "meta.llama2-70b-chat-v1",
             "mistral.mistral-7b-instruct-v0:2",
@@ -140,31 +141,7 @@
             "temperature": 0.5,
             "top_p": 0.5,
             "max_tokens": 200,
-            "stop": [],
-            "countPenalty": {
-              "scale": 0,
-              "applyToWhitespaces": false,
-              "applyToPunctuations": false,
-              "applyToNumbers": false,
-              "applyToStopwords": false,
-              "applyToEmojis": false
-            },
-            "presence_penalty": {
-              "scale": 0,
-              "applyToWhitespaces": false,
-              "applyToPunctuations": false,
-              "applyToNumbers": false,
-              "applyToStopwords": false,
-              "applyToEmojis": false
-            },
-            "frequency_penalty": {
-              "scale": 0,
-              "applyToWhitespaces": false,
-              "applyToPunctuations": false,
-              "applyToNumbers": false,
-              "applyToStopwords": false,
-              "applyToEmojis": false
-            }
+            "stop": []
           },
           "markdownDescription": "[Inference parameters for AI21 Jamba-Instruct models.](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-jamba.html)"
         },

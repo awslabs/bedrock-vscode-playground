@@ -50,6 +50,7 @@ export function getWebviewContent(
                             <vscode-option value="ai21.jamba-instruct-v1:0">AI21 Jamba Instruct</vscode-option>
                             <vscode-option value="amazon.titan-text-express-v1">Amazon Titan Text G1 - Express</vscode-option>
                             <vscode-option value="amazon.titan-text-lite-v1">Amazon Titan Text G1 - Lite</vscode-option>
+                            <vscode-option value="amazon.titan-text-premier-v1:0">Amazon Titan Text G1 - Premier</vscode-option>
                             <vscode-option value="meta.llama2-13b-chat-v1">Meta Llama 2 Chat 13B</vscode-option>
                             <vscode-option value="meta.llama2-70b-chat-v1">Meta Llama 2 Chat 70B</vscode-option>
                             <vscode-option value="meta.llama3-8b-instruct-v1:0">Meta Llama 3 8B Instruct</vscode-option>
