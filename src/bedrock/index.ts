@@ -41,6 +41,7 @@ export function createGenerator(modelId: string) {
     case "mistral.mistral-7b-instruct-v0:2":
     case "mistral.mixtral-8x7b-instruct-v0:1":
     case "mistral.mistral-large-2402-v1:0":
+    case "mistral.mistral-small-2402-v1:0":
     case "mistral.mistral-large-2407-v1:0":
       return new Mistral(modelId);
     default:

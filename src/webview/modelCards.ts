@@ -224,7 +224,7 @@ export const mistral_8x7b_Instruct_ModelCard = `
 export const mistral_Large_ModelCard = `
 <p> The most advanced Mistral AI Large Language model capable of handling any language task including complex multilingual reasoning, text understanding, transformation, and code generation.
     <ul>
-        <li> Version: 1.0 </li>
+        <li> Version: 2402 </li>
         <li> Max tokens: 32K </li>
         <li> Languages: English, French, Italian, German and Spanish</li>
         <li> Supported use cases: Variety </li>
@@ -233,11 +233,23 @@ export const mistral_Large_ModelCard = `
 </p>
 `;
 
+export const mistral_Small_ModelCard = `
+<p> Mistral Small is perfectly suited for straightforward tasks that can be performed in bulk, such as classification, customer support, or text generation. It provides outstanding performance at a cost-effective price point.
+    <ul>
+        <li> Version: 2402 </li>
+        <li> Max tokens: 32K </li>
+        <li> Languages: English, French, Italian, German and Spanish</li>
+        <li> Supported use cases: Variety </li>
+        <li> Model attributes: Text generation, Code generation, Classification, RAG, Conversation </li>
+    </ul>
+</p>
+`;
+
 export const mistral_Large_2_ModelCard = `
 <p> The most advanced Mistral AI Large Language model capable of handling any language task including complex multilingual reasoning, text understanding, transformation, and code generation.
     <ul>
         <li> Version: 1.0 </li>
-        <li> Max tokens: 32K </li>
+        <li> Max tokens: 128K </li>
         <li> Languages: English, French, Italian, German and Spanish</li>
         <li> Supported use cases: Variety </li>
         <li> Model attributes: Complex reasoning & analysis, Text generation, Code generation, RAG, Agents </li>

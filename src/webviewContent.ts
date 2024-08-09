@@ -60,8 +60,9 @@ export function getWebviewContent(
                             <vscode-option value="meta.llama3-1-405b-instruct-v1:0">Meta Llama 3.1 405B Instruct</vscode-option>
                             <vscode-option value="mistral.mistral-7b-instruct-v0:2">Mistral 7B Instruct</vscode-option>
                             <vscode-option value="mistral.mixtral-8x7b-instruct-v0:1">Mistral 8x7B Instruct</vscode-option>
-                            <vscode-option value="mistral.mistral-large-2402-v1:0">Mistral Large</vscode-option>
-                            <vscode-option value="mistral.mistral-large-2407-v1:0">Mistral Large 2</vscode-option>
+                            <vscode-option value="mistral.mistral-large-2402-v1:0">Mistral Large (24.02)</vscode-option>
+                            <vscode-option value="mistral.mistral-small-2402-v1:0">Mistral Small (24.02)</vscode-option>
+                            <vscode-option value="mistral.mistral-large-2407-v1:0">Mistral Large 2 (24.07)</vscode-option>
                         </vscode-dropdown>
                     </div>
                 </div>

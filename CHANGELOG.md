@@ -6,11 +6,11 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
-## [0.7.0] - 2024-07-31
+## [0.7.0] - 2024-08-08
 
 ### Added
 
-- Support for: Llama 3.1 8B Instruct, Llama 3.1 70B Instruct, Llama 3.1 405B Instruct, Claude 3.5 Sonnet, AI21 Jamba Instruct, Mistral Large 2, and Amazon Titan Text G1 - Premier
+- Support for: Llama 3.1 8B Instruct, Llama 3.1 70B Instruct, Llama 3.1 405B Instruct, Claude 3.5 Sonnet, AI21 Jamba Instruct, Mistral Large 2, Mistral Small, and Amazon Titan Text G1 - Premier
 
 ## [0.6.0] - 2024-05-01
 
