@@ -23,11 +23,13 @@ provideVSCodeDesignSystem().register(
 import {
   titanTextExpressModelCard,
   titanTextLiteModelCard,
+  titanTextPremierModelCard,
   claude_2_ModelCard,
   claude_2_1_ModelCard,
   claude_3_Sonnet_ModelCard,
   claude_3_Haiku_ModelCard,
   claude_3_Opus_ModelCard,
+  claude_3_5_Sonnet_ModelCard,
   claudeInstantModelCard,
   commandModelCard,
   commandLightModelCard,
@@ -38,6 +40,10 @@ import {
   mistral_7b_Instruct_ModelCard,
   mistral_8x7b_Instruct_ModelCard,
   mistral_Large_ModelCard,
+  mistral_Small_ModelCard,
+  mistral_Large_2_ModelCard,
+  llama_3_1_ModelCard,
+  jurassicJambaModelCard,
 } from "./modelCards";
 
 export const modelCardMapping: Record<string, string> = {
@@ -53,6 +59,7 @@ export const modelCardMapping: Record<string, string> = {
   "ai21.j2-mid-v1": jurassicMidModelCard,
   "amazon.titan-text-express-v1": titanTextExpressModelCard,
   "amazon.titan-text-lite-v1": titanTextLiteModelCard,
+  "amazon.titan-text-premier-v1:0": titanTextPremierModelCard,
   "meta.llama2-13b-chat-v1": llama_2_ModelCard,
   "meta.llama2-70b-chat-v1": llama_2_ModelCard,
   "meta.llama3-8b-instruct-v1:0": llama_3_ModelCard,
@@ -60,6 +67,13 @@ export const modelCardMapping: Record<string, string> = {
   "mistral.mistral-7b-instruct-v0:2": mistral_7b_Instruct_ModelCard,
   "mistral.mixtral-8x7b-instruct-v0:1": mistral_8x7b_Instruct_ModelCard,
   "mistral.mistral-large-2402-v1:0": mistral_Large_ModelCard,
+  "mistral.mistral-small-2402-v1:0": mistral_Small_ModelCard,
+  "mistral.mistral-large-2407-v1:0": mistral_Large_2_ModelCard,
+  "meta.llama3-1-8b-instruct-v1:0": llama_3_1_ModelCard,
+  "meta.llama3-1-70b-instruct-v1:0": llama_3_1_ModelCard,
+  "meta.llama3-1-405b-instruct-v1:0": llama_3_1_ModelCard,
+  "ai21.jamba-instruct-v1:0": jurassicJambaModelCard,
+  "anthropic.claude-3-5-sonnet-20240620-v1:0": claude_3_5_Sonnet_ModelCard
 };
 
 // Get access to the VS Code API from within the webview context
@@ -78,7 +92,7 @@ function main() {
   runButton?.addEventListener("click", handleRunClick);
   clearButton?.addEventListener("click", handleClearClick);
   copyButton?.addEventListener("click", handleCopyClick);
-  const selectedLLM = "anthropic.claude-3-opus-20240229-v1:0";
+  const selectedLLM = "anthropic.claude-3-5-sonnet-20240620-v1:0";
   getModelCard(selectedLLM);
 }
 

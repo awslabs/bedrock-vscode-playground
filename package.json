@@ -2,7 +2,7 @@
   "name": "bedrock-vscode-playground",
   "displayName": "Bedrock Visual Studio Code Playground",
   "description": "Explore and experiment with large language models (LLMs) available in Amazon Bedrock",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "publisher": "AmazonWebServices-AISolutionsArchitecture",
   "engines": {
     "vscode": "^1.82.0"
@@ -61,14 +61,22 @@
             "ai21.j2-mid-v1",
             "amazon.titan-text-express-v1",
             "amazon.titan-text-lite-v1",
+            "amazon.titan-text-premier-v1:0",
             "meta.llama2-13b-chat-v1",
             "meta.llama2-70b-chat-v1",
             "mistral.mistral-7b-instruct-v0:2",
             "mistral.mixtral-8x7b-instruct-v0:1",
             "mistral.mistral-large-2402-v1:0",
+            "mistral.mistral-small-2402-v1:0",
             "meta.llama3-8b-instruct-v1:0",
             "meta.llama3-70b-instruct-v1:0",
-            "anthropic.claude-3-opus-20240229-v1:0"
+            "anthropic.claude-3-opus-20240229-v1:0",
+            "anthropic.claude-3-5-sonnet-20240620-v1:0",
+            "meta.llama3-1-8b-instruct-v1:0",
+            "meta.llama3-1-70b-instruct-v1:0",
+            "meta.llama3-1-405b-instruct-v1:0",
+            "ai21.jamba-instruct-v1:0",
+            "mistral.mistral-large-2407-v1:0"
           ],
           "markdownDescription": "The default model for to use for `Bedrock Playground: Generate` command."
         },
@@ -127,6 +135,16 @@
             }
           },
           "markdownDescription": "[Inference parameters for AI21 Jurassic-2 models.](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-jurassic2.html)"
+        },
+        "bedrockPlayground.inferenceParameters.AI21 Jamba-Instruct": {
+          "type": "object",
+          "default": {
+            "temperature": 0.5,
+            "top_p": 0.5,
+            "max_tokens": 200,
+            "stop": []
+          },
+          "markdownDescription": "[Inference parameters for AI21 Jamba-Instruct models.](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-jamba.html)"
         },
         "bedrockPlayground.inferenceParameters.amazonTitanText": {
           "type": "object",
